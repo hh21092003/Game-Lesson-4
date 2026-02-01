@@ -1,59 +1,29 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Service Training Game</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Restaurant Service Training Game</h1>
-        <div id="game-area">
-            <p id="scenario"></p>
-            <input type="text" id="user-input" placeholder="Type your response here..."/>
-            <button id="submit-btn">Submit</button>
+    <header>
+        <h1>Welcome to the Restaurant Service Training Game</h1>
+    </header>
+    <main>
+        <div id="game-container">
+            <h2>Scenario: Handling a Customer Order</h2>
+            <div id="speech-container">
+                <button id="start-button">Start Speech Recognition</button>
+                <p id="speech-output">Say something...</p>
+            </div>
+            <div id="dialogue-container"></div>
+            <button id="submit-response">Submit</button>
         </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            // Improved scenarios
-            let scenarios = [
-                "A customer is unhappy with their order.",
-                "A customer has a food allergy.",
-                "A customer wants to know the ingredients of a dish."
-            ];
-            let currentScenarioIndex = 0;
-            $('#scenario').text(scenarios[currentScenarioIndex]);
-
-            // Speech recognition using annyang
-            if (annyang) {
-                let commands = {
-                    '*text': function(text) {
-                        $('#user-input').val(text);
-                        $('#submit-btn').click();
-                    }
-                };
-                annyang.addCommands(commands);
-                annyang.start();
-            }
-
-            // Submit response
-            $('#submit-btn').click(function() {
-                let userResponse = $('#user-input').val();
-                // Process response logic
-                // Advancing scenarios or providing feedback could go here
-                currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length;
-                $('#scenario').text(scenarios[currentScenarioIndex]);
-                $('#user-input').val('');
-            });
-        });
-    </script>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
-        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; background: white; }
-        #game-area { margin-top: 20px; }
-        input { width: 100%; padding: 10px; margin-top: 10px; }
-        button { padding: 10px; }
-    </style>
+    </main>
+    <footer>
+        <p>&copy; 2026 Restaurant Training Inc.</p>
+    </footer>
 </body>
 </html>
