@@ -1,29 +1,1062 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Service Training Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant Service Speaking Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#0f1733;
+      --card2:#121c3d;
+      --text:#e9ecf5;
+      --muted:#b8c0da;
+      --accent:#ffb020;
+      --accent2:#64d2ff;
+      --ok:#2ee59d;
+      --bad:#ff5d6c;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 16px 50px rgba(0,0,0,.45);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(100,210,255,.25), transparent 55%),
+                  radial-gradient(1000px 700px at 90% 30%, rgba(255,176,32,.18), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+
+    .app{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+    }
+
+    @media (max-width: 920px){
+      .app{grid-template-columns: 1fr;}
+    }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .header{
+      padding:18px 18px 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), transparent);
+      border-bottom:1px solid var(--line);
+    }
+
+    .titleRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .logo{
+      width:40px;height:40px;border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,176,32,.9), rgba(100,210,255,.55));
+      display:grid;place-items:center;
+      font-weight:800;
+      color:#0b1020;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      line-height:1.2;
+    }
+    .brand p{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .progressWrap{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .bar{
+      flex:1;
+      height:8px;
+      background: rgba(255,255,255,.08);
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid var(--line);
+    }
+    .fill{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--ok), var(--accent));
+      transition: width .35s ease;
+    }
+    .lvlTxt{
+      font-size:12px;color:var(--muted);
+      min-width:120px;text-align:right;
+    }
+
+    .content{
+      padding:18px;
+    }
+
+    .scenario{
+      background: linear-gradient(180deg, rgba(255,176,32,.12), rgba(255,176,32,.05));
+      border:1px solid rgba(255,176,32,.20);
+      border-radius:16px;
+      padding:14px 14px 12px;
+      margin-bottom:14px;
+    }
+
+    .scenarioTop{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
+
+    .scenario h2{
+      margin:0;
+      font-size:16px;
+      line-height:1.2;
+    }
+    .scenario .desc{
+      margin:8px 0 0;
+      color: rgba(233,236,245,.92);
+      font-size:13px;
+    }
+    .tag{
+      font-size:12px;
+      color: rgba(233,236,245,.85);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      white-space:nowrap;
+    }
+
+    .qBlock{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      margin-bottom:14px;
+    }
+
+    .qTitle{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:10px;
+    }
+    .qTitle .icon{
+      width:34px;height:34px;border-radius:12px;
+      background: rgba(100,210,255,.16);
+      border:1px solid rgba(100,210,255,.22);
+      display:grid;place-items:center;
+      font-size:18px;
+    }
+    .qTitle .text{
+      flex:1;
+    }
+    .qTitle .text b{
+      display:block;
+      font-size:14px;
+    }
+    .qTitle .text span{
+      display:block;
+      margin-top:2px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .options{
+      display:grid;
+      gap:10px;
+    }
+
+    .opt{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 12px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .opt .badge{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.16);
+      display:grid;place-items:center;
+      font-weight:700;
+      color: rgba(233,236,245,.92);
+      flex:0 0 auto;
+    }
+    .opt .txt{
+      font-size:13px;
+      color: rgba(233,236,245,.96);
+      line-height:1.35;
+      flex:1;
+    }
+
+    .controls{
+      display:grid;
+      gap:12px;
+      padding:14px;
+      border-top:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+
+    .micRow{
+      display:flex;
+      gap:10px;
+      align-items:stretch;
+      flex-wrap:wrap;
+    }
+
+    .micBtn{
+      flex: 1 1 240px;
+      border:none;
+      border-radius:16px;
+      padding:14px 14px;
+      cursor:pointer;
+      background: linear-gradient(180deg, rgba(255,93,108,.95), rgba(255,93,108,.65));
+      color:white;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      box-shadow: 0 12px 30px rgba(255,93,108,.18);
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .micBtn.listening{
+      background: linear-gradient(180deg, rgba(46,229,157,.95), rgba(46,229,157,.62));
+      box-shadow: 0 12px 30px rgba(46,229,157,.18);
+    }
+    .micBtn:disabled{opacity:.6; cursor:not-allowed;}
+
+    .hintMini{
+      flex: 1 1 260px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:12px 12px;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.35;
+    }
+
+    .typeRow{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .typeRow input{
+      flex:1;
+      border-radius:14px;
+      border:1px solid var(--line);
+      padding:12px 12px;
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+      font-size:13px;
+    }
+    .typeRow button{
+      border:none;
+      border-radius:14px;
+      padding:12px 14px;
+      background: linear-gradient(180deg, rgba(100,210,255,.95), rgba(100,210,255,.62));
+      color:#0b1020;
+      font-weight:800;
+      cursor:pointer;
+      min-width:110px;
+    }
+    .typeRow button:disabled{opacity:.6; cursor:not-allowed;}
+
+    .live{
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:12px 12px;
+    }
+    .live .label{
+      font-size:12px;
+      color: var(--muted);
+      margin-bottom:6px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .live .transcript{
+      font-size:14px;
+      line-height:1.35;
+      min-height:42px;
+      color: rgba(233,236,245,.95);
+      white-space:pre-wrap;
+    }
+
+    .status{
+      border-radius:16px;
+      padding:12px 12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.16);
+      font-size:13px;
+      line-height:1.35;
+    }
+    .status.ok{
+      border-color: rgba(46,229,157,.35);
+      background: rgba(46,229,157,.12);
+    }
+    .status.bad{
+      border-color: rgba(255,93,108,.35);
+      background: rgba(255,93,108,.12);
+    }
+
+    .nextRow{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .nextBtn{
+      border:none;
+      border-radius:16px;
+      padding:12px 14px;
+      background: linear-gradient(180deg, rgba(255,176,32,.95), rgba(255,176,32,.62));
+      color:#0b1020;
+      font-weight:900;
+      cursor:pointer;
+      min-width:160px;
+      display:none;
+    }
+    .nextBtn.show{display:inline-flex; align-items:center; justify-content:center; gap:10px;}
+    .ghostBtn{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px 14px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      cursor:pointer;
+      min-width:160px;
+    }
+
+    .side{
+      display:grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .teacher{
+      padding:18px;
+    }
+    .teacher h3{
+      margin:0;
+      font-size:14px;
+    }
+    .teacher p{
+      margin:6px 0 12px;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.4;
+    }
+    .teacher textarea{
+      width:100%;
+      min-height:360px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color: rgba(233,236,245,.95);
+      padding:12px;
+      font-size:12px;
+      line-height:1.45;
+      outline:none;
+      resize:vertical;
+    }
+    .tBtns{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+    .tBtns button{
+      border:none;
+      border-radius:14px;
+      padding:10px 12px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .apply{
+      background: linear-gradient(180deg, rgba(46,229,157,.95), rgba(46,229,157,.62));
+      color:#0b1020;
+    }
+    .reset{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color: var(--muted);
+    }
+    .export{
+      background: linear-gradient(180deg, rgba(100,210,255,.95), rgba(100,210,255,.62));
+      color:#0b1020;
+    }
+
+    .foot{
+      padding:14px 18px 18px;
+      border-top:1px solid var(--line);
+      color: var(--muted);
+      font-size:11px;
+      line-height:1.4;
+    }
+    .k{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: rgba(233,236,245,.85);
+      font-size:11px;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to the Restaurant Service Training Game</h1>
-    </header>
-    <main>
-        <div id="game-container">
-            <h2>Scenario: Handling a Customer Order</h2>
-            <div id="speech-container">
-                <button id="start-button">Start Speech Recognition</button>
-                <p id="speech-output">Say something...</p>
+  <div class="app">
+    <!-- Main game -->
+    <section class="panel">
+      <div class="header">
+        <div class="titleRow">
+          <div class="brand">
+            <div class="logo">RS</div>
+            <div>
+              <h1>Restaurant Service Speaking Game</h1>
+              <p>English for Tourism - speak one of the 3 options to pass</p>
             </div>
-            <div id="dialogue-container"></div>
-            <button id="submit-response">Submit</button>
+          </div>
+          <div class="pill" id="techPill">🎙️ Speech: checking…</div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2026 Restaurant Training Inc.</p>
-    </footer>
+
+        <div class="progressWrap">
+          <div class="bar"><div class="fill" id="fill"></div></div>
+          <div class="lvlTxt" id="lvlTxt">Level 1 of 7</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="scenario">
+          <div class="scenarioTop">
+            <div>
+              <h2 id="lvlTitle">Level 1 - Welcoming</h2>
+              <div class="desc" id="lvlDesc">
+                A guest walks in. You cannot find their name on the reservation list.
+              </div>
+            </div>
+            <div class="tag" id="lvlTag">🪑 Front of house</div>
+          </div>
+        </div>
+
+        <div class="qBlock">
+          <div class="qTitle">
+            <div class="icon">❓</div>
+            <div class="text">
+              <b id="qText">Choose the most professional line to say.</b>
+              <span>Speak ONE of the 3 options. You can also type if needed.</span>
+            </div>
+          </div>
+
+          <div class="options" id="options"></div>
+        </div>
+
+        <div class="controls">
+          <div class="micRow">
+            <button class="micBtn" id="micBtn" title="Hold to talk">
+              🎙️ Hold to Talk
+            </button>
+            <div class="hintMini">
+              <div class="k">Tip</div>
+              Speak clearly and pause between words.<br/>
+              Works best on <span class="k">Chrome</span> or <span class="k">Edge</span> with <span class="k">HTTPS</span>.
+            </div>
+          </div>
+
+          <div class="typeRow">
+            <input id="typeInput" type="text" placeholder='Type exactly one of the options if mic fails…' />
+            <button id="checkBtn">Check</button>
+          </div>
+
+          <div class="live">
+            <div class="label">
+              <span>Live transcript</span>
+              <span id="confTxt" class="k">conf: -</span>
+            </div>
+            <div class="transcript" id="transcript">Waiting…</div>
+          </div>
+
+          <div class="status" id="status">
+            Ready. Hold the mic button and read one option.
+          </div>
+
+          <div class="nextRow">
+            <button class="ghostBtn" id="retryBtn">Retry</button>
+            <button class="nextBtn" id="nextBtn">Next Table ➜</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        If speech keeps failing: open this file via a local server (or any HTTPS host). On Mac/Windows: Chrome permission for Microphone must be allowed.
+      </div>
+    </section>
+
+    <!-- Teacher mode -->
+    <aside class="panel side">
+      <div class="teacher">
+        <h3>Teacher mode - Edit levels</h3>
+        <p>
+          Paste JSON below to change scenarios and options. Each level needs:
+          <span class="k">title</span>, <span class="k">desc</span>, <span class="k">tag</span>,
+          and <span class="k">options</span> (3 items). Mark correct with <span class="k">correct:true</span>.
+        </p>
+
+        <textarea id="jsonBox"></textarea>
+
+        <div class="tBtns">
+          <button class="apply" id="applyBtn">Apply</button>
+          <button class="reset" id="resetBtn">Load Default</button>
+          <button class="export" id="exportBtn">Export JSON</button>
+        </div>
+      </div>
+      <div class="foot">
+        Matching rules: tolerant to punctuation, casing, small word differences. Still requires the student to read close to one option, so the game stays fair.
+      </div>
+    </aside>
+  </div>
+
+<script>
+/* ======================
+   1) DATA
+====================== */
+const DEFAULT_LEVELS = [
+  {
+    title: "Level 1 - Welcoming",
+    tag: "🧾 Reservations",
+    desc: "A guest walks in. You cannot find their name on the reservation list.",
+    question: "What should you say to greet and confirm politely?",
+    options: [
+      { key:"A", text: "What do you want?", correct:false, rude:true, msg:"Not polite enough!" },
+      { key:"B", text: "Good evening. Do you have a reservation?", correct:true },
+      { key:"C", text: "Sit anywhere you like.", correct:false, rude:false, msg:"Too casual for fine dining." }
+    ]
+  },
+  {
+    title: "Level 2 - Seating and Menu",
+    tag: "🪑 Seating",
+    desc: "You have just seated the guests at their table.",
+    question: "What should you say when handing the menu?",
+    options: [
+      { key:"A", text: "Here is the menu.", correct:true },
+      { key:"B", text: "Read this.", correct:false, rude:true, msg:"Not polite enough!" },
+      { key:"C", text: "Menu.", correct:false, rude:false, msg:"Too short and abrupt." }
+    ]
+  },
+  {
+    title: "Level 3 - Taking Order",
+    tag: "📝 Orders",
+    desc: "The guest has looked at the menu for 5 minutes and closes it.",
+    question: "What should you say to take the order professionally?",
+    options: [
+      { key:"A", text: "Eat what?", correct:false, rude:true, msg:"Not polite enough!" },
+      { key:"B", text: "Are you ready to order?", correct:true },
+      { key:"C", text: "Tell me your food now.", correct:false, rude:true, msg:"Not polite enough!" }
+    ]
+  },
+  {
+    title: "Level 4 - Sending to Kitchen",
+    tag: "🍳 Kitchen",
+    desc: "You enter the order into POS or speak to the kitchen for Table 5.",
+    question: "Which line is clear and professional for the kitchen?",
+    options: [
+      { key:"A", text: "Cook two steaks now!", correct:false, rude:true, msg:"Not polite enough!" },
+      { key:"B", text: "Table 5, two beefsteaks, medium rare, please.", correct:true },
+      { key:"C", text: "Give me meat for table 5.", correct:false, rude:false, msg:"Unprofessional wording." }
+    ]
+  },
+  {
+    title: "Level 5 - Serving Food",
+    tag: "🍽️ Serving",
+    desc: "You bring the steak to the table.",
+    question: "What should you say when serving the dish?",
+    options: [
+      { key:"A", text: "Your food.", correct:false, rude:false, msg:"Too curt." },
+      { key:"B", text: "Here is your steak. Enjoy your meal.", correct:true },
+      { key:"C", text: "Eat quickly before it gets cold.", correct:false, rude:true, msg:"Not polite enough!" }
+    ]
+  },
+  {
+    title: "Level 6 - Billing",
+    tag: "💳 Payment",
+    desc: "The guest asks for the bill.",
+    question: "What is the most professional line for payment?",
+    options: [
+      { key:"A", text: "Give me money.", correct:false, rude:true, msg:"Not polite enough!" },
+      { key:"B", text: "Pay cash or card?", correct:false, rude:false, msg:"Too direct. Needs softening." },
+      { key:"C", text: "Certainly. Would you like to pay by cash or credit card?", correct:true }
+    ]
+  },
+  {
+    title: "Level 7 - Farewell",
+    tag: "👋 Goodbye",
+    desc: "The guest stands up and leaves.",
+    question: "What should you say to close politely?",
+    options: [
+      { key:"A", text: "Thank you for dining with us. Have a wonderful evening.", correct:true },
+      { key:"B", text: "Go home.", correct:false, rude:true, msg:"Not polite enough!" },
+      { key:"C", text: "Bye bye.", correct:false, rude:false, msg:"Too casual for this setting." }
+    ]
+  }
+];
+
+let levels = structuredClone(DEFAULT_LEVELS);
+let current = 0;
+let locked = false;
+
+/* ======================
+   2) DOM
+====================== */
+const $ = (id) => document.getElementById(id);
+const ui = {
+  fill: $("fill"),
+  lvlTxt: $("lvlTxt"),
+  lvlTitle: $("lvlTitle"),
+  lvlDesc: $("lvlDesc"),
+  lvlTag: $("lvlTag"),
+  qText: $("qText"),
+  options: $("options"),
+  techPill: $("techPill"),
+  micBtn: $("micBtn"),
+  typeInput: $("typeInput"),
+  checkBtn: $("checkBtn"),
+  transcript: $("transcript"),
+  confTxt: $("confTxt"),
+  status: $("status"),
+  retryBtn: $("retryBtn"),
+  nextBtn: $("nextBtn"),
+  jsonBox: $("jsonBox"),
+  applyBtn: $("applyBtn"),
+  resetBtn: $("resetBtn"),
+  exportBtn: $("exportBtn"),
+};
+
+/* ======================
+   3) Speech Recognition
+====================== */
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null;
+let isListening = false;
+let lastConfidence = null;
+
+function setTechPill(text, ok=true){
+  ui.techPill.textContent = text;
+  ui.techPill.style.borderColor = ok ? "rgba(46,229,157,.35)" : "rgba(255,93,108,.35)";
+}
+
+function initSpeech(){
+  if(!SpeechRecognition){
+    setTechPill("🎙️ Speech: not supported", false);
+    ui.micBtn.disabled = true;
+    ui.micBtn.textContent = "🎙️ Mic unavailable";
+    ui.status.className = "status bad";
+    ui.status.textContent = "Speech recognition is not supported in this browser. Use typing.";
+    return;
+  }
+
+  rec = new SpeechRecognition();
+  rec.lang = "en-US";
+  rec.interimResults = true;        // show live text
+  rec.maxAlternatives = 3;
+
+  rec.onstart = () => {
+    isListening = true;
+    ui.micBtn.classList.add("listening");
+    ui.transcript.textContent = "Listening…";
+    ui.status.className = "status";
+    ui.status.textContent = "Listening. Read ONE option clearly.";
+  };
+
+  rec.onend = () => {
+    isListening = false;
+    ui.micBtn.classList.remove("listening");
+  };
+
+  rec.onerror = (e) => {
+    ui.micBtn.classList.remove("listening");
+    isListening = false;
+
+    const err = e.error || "unknown";
+    ui.status.className = "status bad";
+    if(err === "no-speech"){
+      ui.status.textContent = "No sound detected. Retry and speak closer to the mic, or type the option.";
+    } else if(err === "not-allowed" || err === "service-not-allowed"){
+      ui.status.textContent = "Mic permission blocked. Allow microphone access and use HTTPS, or type.";
+    } else if(err === "audio-capture"){
+      ui.status.textContent = "Mic not found. Check device input, then retry, or type.";
+    } else {
+      ui.status.textContent = "Speech error: " + err + ". Use typing if needed.";
+    }
+  };
+
+  rec.onresult = (event) => {
+    // Build interim + final text
+    let interim = "";
+    let finalText = "";
+    let bestConf = null;
+
+    for (let i = event.resultIndex; i < event.results.length; i++){
+      const res = event.results[i];
+      const alt0 = res[0];
+      if(res.isFinal){
+        finalText += alt0.transcript + " ";
+        bestConf = alt0.confidence;
+      } else {
+        interim += alt0.transcript;
+      }
+    }
+
+    if(interim){
+      ui.transcript.textContent = interim;
+      ui.confTxt.textContent = "conf: …";
+    }
+
+    if(finalText.trim()){
+      const spoken = finalText.trim();
+      lastConfidence = (typeof bestConf === "number") ? bestConf : null;
+      ui.typeInput.value = spoken;
+      ui.transcript.textContent = spoken;
+      ui.confTxt.textContent = "conf: " + (lastConfidence === null ? "-" : lastConfidence.toFixed(2));
+      checkAnswer(spoken);
+    }
+  };
+
+  setTechPill("🎙️ Speech: ready", true);
+}
+
+/* ======================
+   4) Matching logic
+====================== */
+function normalize(s){
+  return (s || "")
+    .toLowerCase()
+    .replace(/’/g,"'")
+    .replace(/[^a-z0-9\s']/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function tokenSet(s){
+  const t = normalize(s).split(" ").filter(Boolean);
+  return new Set(t);
+}
+
+function jaccard(a, b){
+  const A = tokenSet(a);
+  const B = tokenSet(b);
+  if(A.size === 0 || B.size === 0) return 0;
+  let inter = 0;
+  for(const x of A){ if(B.has(x)) inter++; }
+  const union = A.size + B.size - inter;
+  return inter / union;
+}
+
+// Basic Levenshtein distance
+function levenshtein(a,b){
+  a = normalize(a); b = normalize(b);
+  const m = a.length, n = b.length;
+  if(m === 0) return n;
+  if(n === 0) return m;
+  const dp = Array.from({length:m+1}, ()=> new Array(n+1).fill(0));
+  for(let i=0;i<=m;i++) dp[i][0]=i;
+  for(let j=0;j<=n;j++) dp[0][j]=j;
+  for(let i=1;i<=m;i++){
+    for(let j=1;j<=n;j++){
+      const cost = a[i-1] === b[j-1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i-1][j] + 1,
+        dp[i][j-1] + 1,
+        dp[i-1][j-1] + cost
+      );
+    }
+  }
+  return dp[m][n];
+}
+
+function similarity(a,b){
+  const an = normalize(a), bn = normalize(b);
+  const maxLen = Math.max(an.length, bn.length) || 1;
+  const lev = levenshtein(an, bn);
+  const levScore = 1 - (lev / maxLen);
+  const jac = jaccard(an, bn);
+  // Weighted blend: tolerate small speech variations but still requires closeness
+  return 0.65 * levScore + 0.35 * jac;
+}
+
+function bestMatch(input, opts){
+  let best = { opt:null, score:0 };
+  for(const opt of opts){
+    const sc = similarity(input, opt.text);
+    if(sc > best.score){
+      best = { opt, score: sc };
+    }
+  }
+  return best;
+}
+
+/* ======================
+   5) UI render
+====================== */
+function renderLevel(){
+  locked = false;
+  ui.nextBtn.classList.remove("show");
+  ui.status.className = "status";
+  ui.status.textContent = "Ready. Hold the mic button and read one option.";
+  ui.transcript.textContent = "Waiting…";
+  ui.confTxt.textContent = "conf: -";
+  ui.typeInput.value = "";
+  ui.checkBtn.disabled = false;
+  ui.typeInput.disabled = false;
+  ui.micBtn.disabled = !rec;
+
+  const L = levels[current];
+  ui.lvlTitle.textContent = L.title;
+  ui.lvlDesc.textContent = L.desc;
+  ui.lvlTag.textContent = L.tag || "🍽️ Service";
+  ui.qText.textContent = L.question || "Choose the most professional line to say.";
+
+  ui.lvlTxt.textContent = `Level ${current+1} of ${levels.length}`;
+  ui.fill.style.width = `${(current / levels.length) * 100}%`;
+
+  // shuffle display only
+  const shuffled = [...L.options].sort(() => Math.random() - 0.5);
+  ui.options.innerHTML = "";
+  for(const o of shuffled){
+    const div = document.createElement("div");
+    div.className = "opt";
+    div.innerHTML = `
+      <div class="badge">${o.key || ""}</div>
+      <div class="txt">${escapeHtml(o.text)}</div>
+    `;
+    ui.options.appendChild(div);
+  }
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+/* ======================
+   6) Game logic
+====================== */
+function checkAnswer(input){
+  if(locked) return;
+  const L = levels[current];
+
+  const { opt, score } = bestMatch(input, L.options);
+
+  // Threshold tuning:
+  // - 0.88+ usually means they read almost exactly
+  // - allow down to 0.83 if confidence is high
+  const conf = (lastConfidence === null ? 0 : lastConfidence);
+  const passScore = (conf >= 0.75) ? 0.83 : 0.88;
+
+  if(!opt || score < 0.72){
+    ui.status.className = "status bad";
+    ui.status.textContent = "Not matched. Read one option more clearly, or type it exactly.";
+    return;
+  }
+
+  if(opt.correct){
+    locked = true;
+    ui.status.className = "status ok";
+    ui.status.textContent =
+      `Correct. You chose the professional line. (match: ${score.toFixed(2)})`;
+    ui.nextBtn.classList.add("show");
+    ui.checkBtn.disabled = true;
+    ui.typeInput.disabled = true;
+    ui.micBtn.disabled = true;
+    ui.fill.style.width = `${((current+1) / levels.length) * 100}%`;
+    return;
+  }
+
+  // wrong option
+  ui.status.className = "status bad";
+  if(opt.rude){
+    ui.status.textContent = "Not polite enough!";
+  } else {
+    ui.status.textContent = opt.msg || "Not the best choice. Try again.";
+  }
+}
+
+function next(){
+  if(current >= levels.length - 1){
+    ui.status.className = "status ok";
+    ui.status.textContent = "Completed. Restart to play again, or load new levels in Teacher mode.";
+    ui.nextBtn.classList.remove("show");
+    ui.micBtn.disabled = true;
+    ui.typeInput.disabled = true;
+    ui.checkBtn.disabled = true;
+    ui.fill.style.width = "100%";
+    ui.lvlTxt.textContent = "Completed";
+    ui.lvlTitle.textContent = "All levels cleared";
+    ui.lvlDesc.textContent = "Good job. You can replace levels on the right and play again.";
+    ui.lvlTag.textContent = "🏆";
+    return;
+  }
+  current++;
+  renderLevel();
+}
+
+/* ======================
+   7) Controls
+====================== */
+// Hold-to-talk for stability: mousedown/touchstart starts; mouseup/touchend stops
+function startRec(){
+  if(!rec || locked) return;
+  try{ rec.start(); } catch(e){}
+}
+function stopRec(){
+  if(!rec) return;
+  try{ rec.stop(); } catch(e){}
+}
+
+ui.micBtn.addEventListener("mousedown", startRec);
+ui.micBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); startRec(); }, {passive:false});
+window.addEventListener("mouseup", stopRec);
+window.addEventListener("touchend", stopRec);
+
+ui.checkBtn.addEventListener("click", ()=> checkAnswer(ui.typeInput.value));
+ui.typeInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(ui.typeInput.value); });
+
+ui.retryBtn.addEventListener("click", ()=>{
+  if(locked) return;
+  ui.status.className = "status";
+  ui.status.textContent = "Retry. Hold mic and read one option.";
+  ui.typeInput.value = "";
+  ui.transcript.textContent = "Waiting…";
+  ui.confTxt.textContent = "conf: -";
+});
+
+ui.nextBtn.addEventListener("click", next);
+
+/* ======================
+   8) Teacher mode
+====================== */
+function loadDefaultToBox(){
+  ui.jsonBox.value = JSON.stringify(DEFAULT_LEVELS, null, 2);
+}
+
+ui.resetBtn.addEventListener("click", ()=>{
+  levels = structuredClone(DEFAULT_LEVELS);
+  current = 0;
+  loadDefaultToBox();
+  renderLevel();
+});
+
+ui.applyBtn.addEventListener("click", ()=>{
+  try{
+    const parsed = JSON.parse(ui.jsonBox.value);
+    if(!Array.isArray(parsed) || parsed.length === 0) throw new Error("JSON must be an array of levels.");
+    // basic validation
+    for(const lv of parsed){
+      if(!lv.title || !lv.desc || !lv.options || !Array.isArray(lv.options) || lv.options.length !== 3){
+        throw new Error("Each level needs title, desc, and exactly 3 options.");
+      }
+      if(lv.options.filter(o=>o.correct).length !== 1){
+        throw new Error("Each level must have exactly 1 correct option.");
+      }
+    }
+    levels = parsed;
+    current = 0;
+    renderLevel();
+    ui.status.className = "status ok";
+    ui.status.textContent = "Levels applied. Start speaking.";
+  } catch(err){
+    ui.status.className = "status bad";
+    ui.status.textContent = "Teacher mode error: " + (err.message || String(err));
+  }
+});
+
+ui.exportBtn.addEventListener("click", async ()=>{
+  const data = JSON.stringify(levels, null, 2);
+  try{
+    await navigator.clipboard.writeText(data);
+    ui.status.className = "status ok";
+    ui.status.textContent = "Exported to clipboard.";
+  } catch(e){
+    // fallback: select text
+    ui.jsonBox.focus();
+    ui.jsonBox.select();
+    ui.status.className = "status";
+    ui.status.textContent = "Copy manually: JSON selected.";
+  }
+});
+
+/* ======================
+   9) Init
+====================== */
+loadDefaultToBox();
+initSpeech();
+renderLevel();
+
+// Tech pill adjust
+(function(){
+  const isHttps = location.protocol === "https:" || location.hostname === "localhost";
+  if(!isHttps){
+    setTechPill("⚠️ Use HTTPS for mic", false);
+  }
+})();
+</script>
 </body>
 </html>
