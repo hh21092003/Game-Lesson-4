@@ -12,7 +12,6 @@
     :root{
       --bg:#070b18;
       --card:#0f1733;
-      --card2:#121c3d;
       --text:#e9ecf5;
       --muted:#b8c0da;
       --accent:#ffb020;
@@ -42,13 +41,7 @@
     }
 
     .app{
-      width:min(1100px, 100%);
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:16px;
-    }
-    @media (max-width: 980px){
-      .app{grid-template-columns: 1fr;}
+      width:min(980px, 100%);
     }
 
     .panel{
@@ -197,14 +190,6 @@
       position:relative;
       overflow:hidden;
     }
-    .scenario:before{
-      content:"";
-      position:absolute; inset:-40px -60px auto auto;
-      width:180px; height:180px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,176,32,.25), transparent 60%);
-      transform: rotate(10deg);
-      pointer-events:none;
-    }
     .scenarioTop{
       display:flex;
       gap:10px;
@@ -306,14 +291,14 @@
       border-radius:16px;
       padding:14px;
       cursor:pointer;
-      background: linear-gradient(180deg, rgba(255,93,108,.95), rgba(255,93,108,.62));
-      color:white;
+      background: linear-gradient(180deg, rgba(255,176,32,.95), rgba(255,176,32,.62));
+      color:#070b18;
       font-weight:900;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      box-shadow: 0 14px 36px rgba(255,93,108,.20);
+      box-shadow: 0 14px 36px rgba(255,176,32,.18);
       user-select:none;
       -webkit-tap-highlight-color: transparent;
     }
@@ -452,103 +437,71 @@
       min-width:170px;
     }
 
-    /* Right panel */
-    .side{
-      display:grid;
-      grid-template-rows: auto auto 1fr;
-      gap:0;
+    .endWrap{
+      display:none;
+      padding:18px;
     }
-    .sideSection{
-      padding:16px 18px;
-      border-bottom:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-    }
-    .sideSection h3{
-      margin:0;
-      font-size:14px;
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
-    .sideSection p{
-      margin:6px 0 0;
-      font-size:12px;
-      color: var(--muted);
-      line-height:1.4;
-    }
-
-    .board{
-      padding:14px 18px 18px;
-    }
-    .boardTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-    }
-    .boardTop .mini{
-      font-size:12px;
-      color: var(--muted);
-    }
-    .boardList{
-      display:grid;
-      gap:10px;
-    }
-    .row{
+    .endWrap.show{display:block;}
+    .endCard{
       border:1px solid var(--line);
       background: rgba(0,0,0,.18);
-      border-radius:16px;
-      padding:10px 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:14px;
     }
-    .rowLeft{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      min-width:0;
-    }
-    .rank{
-      width:34px;height:34px;border-radius:14px;
-      background: rgba(255,176,32,.14);
-      border:1px solid rgba(255,176,32,.24);
-      display:grid; place-items:center;
-      font-weight:900;
+    .endCard h2{
+      margin:0 0 6px 0;
+      font-size:16px;
       color: rgba(233,236,245,.98);
-      flex:0 0 auto;
     }
-    .who{
-      min-width:0;
-    }
-    .who .nm{
-      font-weight:800;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .who .meta{
+    .endCard p{
+      margin:0;
       font-size:12px;
       color: var(--muted);
-      margin-top:2px;
-    }
-    .scoreBox{
-      text-align:right;
-      flex:0 0 auto;
-    }
-    .scoreBox .sc{
-      font-weight:900;
-      color: rgba(233,236,245,.98);
-    }
-    .scoreBox .acc{
-      font-size:12px;
-      color: rgba(100,210,255,.92);
-      margin-top:2px;
+      line-height:1.5;
     }
 
-    /* Name modal - must be 100% opaque */
+    .btnRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .btn{
+      border:none;
+      border-radius:16px;
+      padding:12px 14px;
+      font-weight:900;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .btnPrimary{
+      background: linear-gradient(180deg, rgba(46,229,157,.95), rgba(46,229,157,.62));
+      color:#070b18;
+    }
+    .btnGhost{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color: rgba(233,236,245,.92);
+      text-decoration:none;
+    }
+
+    .certArea{
+      display:none;
+      margin-top:14px;
+    }
+    .certArea.show{display:block;}
+    canvas{
+      width:100%;
+      height:auto;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#fff;
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+    }
+
     .modalOverlay{
       position:fixed;
       inset:0;
@@ -564,7 +517,7 @@
       width:min(520px, 100%);
       border-radius:20px;
       border:1px solid rgba(255,255,255,.16);
-      background: #0b1229; /* fully opaque */
+      background: #0b1229;
       box-shadow: 0 22px 80px rgba(0,0,0,.70);
       overflow:hidden;
     }
@@ -607,132 +560,25 @@
       background: linear-gradient(180deg, rgba(46,229,157,.95), rgba(46,229,157,.62));
       color:#070b18;
     }
-
-    /* End screen */
-    .endWrap{
-      display:none;
-      padding:18px;
-    }
-    .endWrap.show{display:block;}
-    .endCard{
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.18);
-      border-radius:18px;
-      padding:16px;
-      margin-bottom:14px;
-    }
-    .endCard h2{
-      margin:0 0 6px 0;
-      font-size:16px;
-      color: rgba(233,236,245,.98);
-    }
-    .endCard p{
-      margin:0;
-      font-size:12px;
-      color: var(--muted);
-      line-height:1.5;
-    }
-    .formRow{
-      display:grid;
-      gap:10px;
-      margin-top:12px;
-    }
-    .fitChoices{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .chip{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      border-radius:999px;
-      padding:8px 10px;
-      font-size:12px;
-      color: rgba(233,236,245,.92);
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      cursor:pointer;
-      user-select:none;
-    }
-    .chip input{ accent-color: var(--accent2); }
-    textarea{
-      width:100%;
-      min-height:90px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.22);
-      color: rgba(233,236,245,.95);
-      padding:12px;
-      font-size:13px;
-      outline:none;
-      resize:vertical;
-    }
-    .btnRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      border:none;
-      border-radius:16px;
-      padding:12px 14px;
-      font-weight:900;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-    }
-    .btnPrimary{
-      background: linear-gradient(180deg, rgba(255,176,32,.95), rgba(255,176,32,.62));
-      color:#070b18;
-    }
-    .btnGhost{
-      background: rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color: rgba(233,236,245,.92);
-    }
-
-    .certArea{
-      display:none;
-      margin-top:14px;
-    }
-    .certArea.show{display:block;}
-    canvas{
-      width:100%;
-      height:auto;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#fff;
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    }
-
-    .smallNote{
-      font-size:12px;
-      color: var(--muted);
-      margin-top:10px;
-      line-height:1.4;
-    }
   </style>
 </head>
 
 <body>
-  <!-- Name modal -->
-  <div class="modalOverlay" id="nameOverlay">
+  <!-- Name modal (used at start OR end if name missing) -->
+  <div class="modalOverlay" id="nameOverlay" style="display:none;">
     <div class="modal">
       <div class="modalHead">
-        <h2>Enter your name to start</h2>
-        <p>Leaderboard will show your best score. Use Chrome/Edge on HTTPS for microphone.</p>
+        <h2 id="nameModalTitle">Enter your name</h2>
+        <p id="nameModalDesc">Your name will appear on the certificate.</p>
       </div>
       <div class="modalBody">
         <input id="nameInput" type="text" placeholder="Full name (e.g., Nguyen Van A)" maxlength="50">
-        <button id="startBtn">Start game</button>
+        <button id="nameOkBtn">Continue</button>
       </div>
     </div>
   </div>
 
   <div class="app">
-    <!-- Main game -->
     <section class="panel">
       <div class="header">
         <div class="titleRow">
@@ -756,13 +602,13 @@
         </div>
       </div>
 
-      <div class="content" id="gameWrap">
+      <div class="content">
         <div class="nameCard">
           <div class="nameLeft">
             <div class="avatar">👤</div>
             <div class="nameMeta">
               <div class="n" id="playerLabel">Player</div>
-              <div class="s">Speak or type one option. Next button appears after a correct answer.</div>
+              <div class="s">Tap mic once, speak, it auto checks. Next button appears after correct.</div>
             </div>
           </div>
           <div class="pill" id="micPill"><span class="dot"></span><span id="micTxt">Mic: checking</span></div>
@@ -783,7 +629,7 @@
             <div class="icon">❓</div>
             <div class="text">
               <b id="qText">Choose the most professional line to say.</b>
-              <span id="qVi">Dịch: Chọn câu nói chuyên nghiệp nhất.</span>
+              <span id="qVi">Dịch: …</span>
             </div>
           </div>
           <div class="options" id="options"></div>
@@ -791,11 +637,11 @@
 
         <div class="controls">
           <div class="micRow">
-            <button class="micBtn" id="micBtn" title="Hold to talk">🎙️ Hold to Talk</button>
+            <button class="micBtn" id="micBtn" title="Tap to speak">🎙️ Tap to Speak</button>
             <div class="hintMini">
               <div class="k">Tip</div>
-              Nói rõ từng cụm, ngắt nhẹ giữa từ.<br/>
-              Nếu mic lỗi: dùng ô gõ bên dưới.
+              Tap mic, speak, it auto stops and checks.<br/>
+              If mic fails: use typing below.
             </div>
           </div>
 
@@ -812,7 +658,7 @@
             <div class="transcript" id="transcript">Waiting…</div>
           </div>
 
-          <div class="status" id="status">Ready. Hold the mic button and read one option.</div>
+          <div class="status" id="status">Ready. Tap the mic button and read one option.</div>
 
           <div class="nextRow">
             <button class="ghostBtn" id="retryBtn">Retry</button>
@@ -820,30 +666,16 @@
           </div>
         </div>
 
-        <!-- End screen (form + certificate) -->
+        <!-- End screen -->
         <div class="endWrap" id="endWrap">
           <div class="endCard">
-            <h2>Finish - Quick feedback</h2>
-            <p>Điền form xong sẽ hiện leaderboard và cho tải certificate PNG.</p>
+            <h2>Completed</h2>
+            <p>Generate and download your certificate PNG.</p>
 
-            <div class="formRow">
-              <div style="font-size:12px;color:var(--muted);">1) Bạn thấy hoạt động của lớp có phù hợp với bạn?</div>
-              <div class="fitChoices" id="fitChoices">
-                <label class="chip"><input type="radio" name="fit" value="Phù hợp"> Phù hợp</label>
-                <label class="chip"><input type="radio" name="fit" value="Ổn"> Ổn</label>
-                <label class="chip"><input type="radio" name="fit" value="Không phù hợp"> Không phù hợp</label>
-              </div>
-
-              <div style="font-size:12px;color:var(--muted);">2) Bạn muốn giáo viên cải thiện thêm gì? (bắt buộc)</div>
-              <textarea id="improveBox" placeholder="Gõ ý kiến của bạn ở đây…"></textarea>
-
-              <div class="btnRow">
-                <button class="btn btnPrimary" id="submitFormBtn">Submit form</button>
-                <button class="btn btnGhost" id="makeCertBtn" disabled>Generate certificate</button>
-                <a class="btn btnGhost" id="downloadCertBtn" style="text-decoration:none;display:none;" download="Certificate.png">Download PNG</a>
-              </div>
-
-              <div class="smallNote" id="formNote"></div>
+            <div class="btnRow">
+              <button class="btn btnPrimary" id="makeCertBtn">Generate certificate</button>
+              <a class="btn btnGhost" id="downloadCertBtn" style="display:none;" download="Certificate.png">Download PNG</a>
+              <button class="btn btnGhost" id="replayBtn">Replay</button>
             </div>
           </div>
 
@@ -853,35 +685,9 @@
         </div>
       </div>
     </section>
-
-    <!-- Leaderboard -->
-    <aside class="panel side">
-      <div class="sideSection">
-        <h3>🏆 Leaderboard (Realtime)</h3>
-        <p>Top scores are pulled from your Google Sheet via Apps Script.</p>
-      </div>
-
-      <div class="sideSection">
-        <h3>📌 Scoring rules</h3>
-        <p>Score is based on similarity (0-1). Closer reading scores higher. Wrong choice lowers average accuracy.</p>
-      </div>
-
-      <div class="board">
-        <div class="boardTop">
-          <div class="mini" id="boardMeta">Last update: -</div>
-          <button class="btn btnGhost" id="refreshBoardBtn" style="padding:10px 12px;border-radius:14px;">Refresh</button>
-        </div>
-        <div class="boardList" id="boardList"></div>
-      </div>
-    </aside>
   </div>
 
 <script>
-/* ======================
-   CONFIG
-====================== */
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbzc4MqKvSpWAVyJKEU7jAoHhIbs7wnmTYWBa9OfAfPMTYWu7BtZX9PSHIhGIxPgTcVW/exec";
-
 /* ======================
    GAME DATA
 ====================== */
@@ -973,14 +779,16 @@ const LEVELS = [
 ];
 
 /* ======================
-   STATE
+   STATE + DOM
 ====================== */
 const $ = (id) => document.getElementById(id);
 
 const ui = {
   nameOverlay: $("nameOverlay"),
+  nameModalTitle: $("nameModalTitle"),
+  nameModalDesc: $("nameModalDesc"),
   nameInput: $("nameInput"),
-  startBtn: $("startBtn"),
+  nameOkBtn: $("nameOkBtn"),
 
   playerLabel: $("playerLabel"),
   micPill: $("micPill"),
@@ -1009,31 +817,23 @@ const ui = {
   dot: $("dot"),
 
   endWrap: $("endWrap"),
-  fitChoices: $("fitChoices"),
-  improveBox: $("improveBox"),
-  submitFormBtn: $("submitFormBtn"),
   makeCertBtn: $("makeCertBtn"),
   downloadCertBtn: $("downloadCertBtn"),
-  formNote: $("formNote"),
+  replayBtn: $("replayBtn"),
   certArea: $("certArea"),
   certCanvas: $("certCanvas"),
-
-  boardMeta: $("boardMeta"),
-  boardList: $("boardList"),
-  refreshBoardBtn: $("refreshBoardBtn"),
 };
 
-let player = "";
+let player = "";        // can be empty until end
 let current = 0;
 let locked = false;
-
-let totalScore = 0;          // sum of correct match scores * 100
-let attempts = 0;            // total attempts
-let mistakes = 0;            // wrong attempts
-let correctCount = 0;
-let accuracySum = 0;         // sum of bestMatchScore per attempt (including wrong and unmatched as 0)
-let lastFinalScore = 0;      // similarity for the last check
 let finished = false;
+
+let totalScore = 0;     // sum of correct scores (0-100)
+let attempts = 0;
+let mistakes = 0;
+let accuracySum = 0;
+let lastConfidence = null;
 
 /* ======================
    Speech Recognition
@@ -1041,8 +841,6 @@ let finished = false;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let rec = null;
 let isListening = false;
-let lastConfidence = null;
-let lastInterim = "";
 
 function setMicStatus(text, ok){
   ui.micTxt.textContent = text;
@@ -1060,17 +858,16 @@ function initSpeech(){
 
   rec = new SpeechRecognition();
   rec.lang = "en-US";
-  rec.interimResults = true;     // live transcript
+  rec.interimResults = true;
   rec.maxAlternatives = 3;
   rec.continuous = false;
 
   rec.onstart = () => {
     isListening = true;
     lastConfidence = null;
-    lastInterim = "";
     ui.micBtn.classList.add("listening");
     ui.status.className = "status";
-    ui.status.textContent = "Listening… Read ONE option clearly.";
+    ui.status.textContent = "Listening… Speak now.";
     ui.transcript.textContent = "Listening…";
     ui.confTxt.textContent = "conf: …";
   };
@@ -1086,9 +883,9 @@ function initSpeech(){
     ui.status.className = "status bad";
     const err = e.error || "unknown";
     if(err === "no-speech"){
-      ui.status.textContent = "No sound detected. Retry, or type the option.";
+      ui.status.textContent = "No sound detected. Tap mic and try again, or type the option.";
     } else if(err === "not-allowed" || err === "service-not-allowed"){
-      ui.status.textContent = "Mic permission blocked. Allow microphone access, then retry, or type.";
+      ui.status.textContent = "Mic permission blocked. Allow microphone access, then try again.";
     } else if(err === "audio-capture"){
       ui.status.textContent = "Mic not found. Check device input, or type.";
     } else {
@@ -1113,8 +910,7 @@ function initSpeech(){
     }
 
     if(interim){
-      lastInterim = interim.trim();
-      ui.transcript.textContent = lastInterim;
+      ui.transcript.textContent = interim.trim();
       ui.confTxt.textContent = "conf: …";
     }
 
@@ -1126,7 +922,7 @@ function initSpeech(){
       ui.transcript.textContent = spoken;
       ui.confTxt.textContent = "conf: " + (lastConfidence === null ? "-" : lastConfidence.toFixed(2));
 
-      checkAnswer(spoken); // check immediately after final result
+      checkAnswer(spoken); // auto check immediately
     }
   };
 
@@ -1144,15 +940,12 @@ function normalize(s){
     .replace(/\s+/g, " ")
     .trim();
 }
-
 function tokenize(s){
   return normalize(s).split(" ").filter(Boolean);
 }
-
 function tokenSet(s){
   return new Set(tokenize(s));
 }
-
 function jaccard(a, b){
   const A = tokenSet(a), B = tokenSet(b);
   if(A.size === 0 || B.size === 0) return 0;
@@ -1161,7 +954,6 @@ function jaccard(a, b){
   const union = A.size + B.size - inter;
   return inter / union;
 }
-
 function levenshtein(a,b){
   a = normalize(a); b = normalize(b);
   const m = a.length, n = b.length;
@@ -1182,22 +974,19 @@ function levenshtein(a,b){
   }
   return dp[m][n];
 }
-
 function similarity(a,b){
   const an = normalize(a), bn = normalize(b);
   const maxLen = Math.max(an.length, bn.length) || 1;
-  const lev = levenshtein(an, bn);
-  const levScore = 1 - (lev / maxLen);
+  const levScore = 1 - (levenshtein(an, bn) / maxLen);
   const jac = jaccard(an, bn);
 
-  // keyword coverage bonus: helps accept variants like "beef steak" vs "beefsteaks"
+  // keyword coverage bonus for variants
   const A = tokenize(an), B = tokenize(bn);
   const key = new Set(B.filter(w => w.length >= 4));
   let hit = 0;
   for(const w of A){
     if(key.has(w)) hit++;
     else{
-      // soft stem: beefsteaks vs beefsteak
       for(const k of key){
         if(w.startsWith(k) || k.startsWith(w)){
           hit++;
@@ -1208,13 +997,9 @@ function similarity(a,b){
   }
   const cover = key.size ? Math.min(1, hit / key.size) : 0;
 
-  // Weighted blend
   const base = 0.58 * levScore + 0.32 * jac + 0.10 * cover;
-
-  // If ASR confidence is high, allow slightly lower base (handled in threshold)
   return Math.max(0, Math.min(1, base));
 }
-
 function bestMatch(input, options){
   let best = { opt:null, score:0 };
   for(const opt of options){
@@ -1227,7 +1012,7 @@ function bestMatch(input, options){
 }
 
 /* ======================
-   Render
+   Render + UI
 ====================== */
 function escapeHtml(str){
   return String(str)
@@ -1254,7 +1039,7 @@ function renderLevel(){
   finished = false;
   ui.nextBtn.classList.remove("show");
   ui.status.className = "status";
-  ui.status.textContent = "Ready. Hold the mic button and read one option.";
+  ui.status.textContent = "Ready. Tap the mic button and read one option.";
   ui.transcript.textContent = "Waiting…";
   ui.confTxt.textContent = "conf: -";
   ui.typeInput.value = "";
@@ -1292,20 +1077,19 @@ function finishGame(){
   ui.fill.style.width = "100%";
   ui.lvlTxt.textContent = "Completed";
   ui.status.className = "status ok";
-  ui.status.textContent = "Completed. Please fill the form below.";
+  ui.status.textContent = "Completed. Generate your certificate.";
 
   ui.endWrap.classList.add("show");
-  ui.makeCertBtn.disabled = true;
-  ui.downloadCertBtn.style.display = "none";
-  ui.certArea.classList.remove("show");
   updateScoreUI();
 
-  // Send final score to sheet (best effort)
-  sendScoreToSheet_();
+  // If player name is missing, ask now
+  if(!player){
+    openNameModal_("Enter your name to generate certificate", "Your name will appear on the certificate.");
+  }
 }
 
 /* ======================
-   Answer check flow
+   Answer check
 ====================== */
 function checkAnswer(input){
   if(locked) return;
@@ -1318,18 +1102,12 @@ function checkAnswer(input){
   const L = LEVELS[current];
   const { opt, score } = bestMatch(input, L.options);
 
-  // Threshold is "generous" for variants.
-  // - If ASR confidence high, allow lower threshold.
   const conf = (lastConfidence === null ? 0 : lastConfidence);
   const passScore = (conf >= 0.70) ? 0.78 : 0.84;
 
   attempts++;
-  lastFinalScore = score;
-  accuracySum += (score >= 0 ? score : 0);
+  accuracySum += score;
 
-  ui.transcript.textContent = input;
-
-  // Not matched enough
   if(!opt || score < 0.62){
     mistakes++;
     ui.status.className = "status bad";
@@ -1338,7 +1116,6 @@ function checkAnswer(input){
     return;
   }
 
-  // Wrong option
   if(!opt.correct){
     mistakes++;
     ui.status.className = "status bad";
@@ -1347,14 +1124,21 @@ function checkAnswer(input){
     return;
   }
 
-  // Correct option
+  // Correct choice, but require minimum closeness to pass
+  if(score < passScore){
+    mistakes++;
+    ui.status.className = "status bad";
+    ui.status.textContent = `Close, but not enough. Accuracy ${(score*100).toFixed(0)}%. Try again.`;
+    updateScoreUI();
+    return;
+  }
+
   locked = true;
-  correctCount++;
-  const gained = Math.round(score * 100);     // accuracy-based points
+  const gained = Math.round(score * 100);
   totalScore += gained;
 
   ui.status.className = "status ok";
-  ui.status.textContent = `Correct. Accuracy: ${(score*100).toFixed(0)}%. (+${gained} pts)`;
+  ui.status.textContent = `Correct. Accuracy ${(score*100).toFixed(0)}%. (+${gained} pts)`;
 
   ui.nextBtn.classList.add("show");
   ui.checkBtn.disabled = true;
@@ -1362,37 +1146,41 @@ function checkAnswer(input){
   ui.micBtn.disabled = true;
 
   ui.fill.style.width = `${((current+1) / LEVELS.length) * 100}%`;
-
   updateScoreUI();
-
-  // Optional: push partial score to leaderboard while playing (best effort)
-  sendScoreToSheet_(true);
 }
 
 /* ======================
-   Controls
+   Mic button behavior: tap once, auto listen, auto stop
 ====================== */
-function startRec(){
+function startMicOneShot_(){
   if(!rec || locked) return;
-  try{ rec.start(); } catch(e){}
-}
-function stopRec(){
-  if(!rec) return;
-  try{ rec.stop(); } catch(e){}
+
+  if(isListening){
+    // If somehow still listening, ignore extra taps
+    return;
+  }
+
+  try{
+    rec.start();
+  } catch(e){
+    // Some browsers throw if called too quickly after end
+    ui.status.className = "status bad";
+    ui.status.textContent = "Mic busy. Wait 1 second and tap again, or use typing.";
+  }
 }
 
-ui.micBtn.addEventListener("mousedown", startRec);
-ui.micBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); startRec(); }, {passive:false});
-window.addEventListener("mouseup", stopRec);
-window.addEventListener("touchend", stopRec);
+ui.micBtn.addEventListener("click", startMicOneShot_);
 
+/* ======================
+   Other controls
+====================== */
 ui.checkBtn.addEventListener("click", ()=> checkAnswer(ui.typeInput.value));
 ui.typeInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(ui.typeInput.value); });
 
 ui.retryBtn.addEventListener("click", ()=>{
   if(locked) return;
   ui.status.className = "status";
-  ui.status.textContent = "Retry. Hold mic and read one option.";
+  ui.status.textContent = "Retry. Tap mic and read one option.";
   ui.typeInput.value = "";
   ui.transcript.textContent = "Waiting…";
   ui.confTxt.textContent = "conf: -";
@@ -1403,188 +1191,54 @@ ui.nextBtn.addEventListener("click", ()=>{
   renderLevel();
 });
 
-ui.refreshBoardBtn.addEventListener("click", ()=> fetchLeaderboard_());
+ui.replayBtn.addEventListener("click", ()=>{
+  current = 0;
+  locked = false;
+  finished = false;
+  totalScore = 0;
+  attempts = 0;
+  mistakes = 0;
+  accuracySum = 0;
+  ui.endWrap.classList.remove("show");
+  ui.certArea.classList.remove("show");
+  ui.downloadCertBtn.style.display = "none";
+  renderLevel();
+});
 
 /* ======================
-   Leaderboard (JSONP polling)
+   Name modal (used only when needed)
 ====================== */
-let boardTimer = null;
-
-function jsonp(url){
-  return new Promise((resolve, reject)=>{
-    const cb = "cb_" + Math.random().toString(36).slice(2);
-    const script = document.createElement("script");
-    const sep = url.includes("?") ? "&" : "?";
-    script.src = `${url}${sep}callback=${cb}`;
-
-    const timeout = setTimeout(()=>{
-      cleanup();
-      reject(new Error("JSONP timeout"));
-    }, 8000);
-
-    function cleanup(){
-      clearTimeout(timeout);
-      try{ delete window[cb]; } catch(e){}
-      if(script && script.parentNode) script.parentNode.removeChild(script);
-    }
-
-    window[cb] = (data)=>{
-      cleanup();
-      resolve(data);
-    };
-
-    script.onerror = ()=>{
-      cleanup();
-      reject(new Error("JSONP failed"));
-    };
-
-    document.body.appendChild(script);
-  });
+function openNameModal_(title, desc){
+  ui.nameModalTitle.textContent = title;
+  ui.nameModalDesc.textContent = desc;
+  ui.nameInput.value = player || "";
+  ui.nameOverlay.style.display = "flex";
+  setTimeout(()=> ui.nameInput.focus(), 50);
 }
 
-function renderBoard(list){
-  ui.boardList.innerHTML = "";
-  if(!list || !list.length){
-    ui.boardList.innerHTML = `<div class="row"><div class="who"><div class="nm">No data yet</div><div class="meta">Waiting for submissions…</div></div></div>`;
+function closeNameModal_(){
+  ui.nameOverlay.style.display = "none";
+}
+
+ui.nameOkBtn.addEventListener("click", ()=>{
+  const nm = ui.nameInput.value.trim();
+  if(!nm){
+    ui.nameInput.focus();
     return;
   }
+  player = nm;
+  ui.playerLabel.textContent = player;
+  closeNameModal_();
+});
 
-  list.slice(0, 15).forEach((it, idx)=>{
-    const div = document.createElement("div");
-    div.className = "row";
-    const sc = Number(it.totalScore || 0);
-    const acc = Number(it.avgAccuracy || 0);
-    const nm = String(it.player || "Player");
-    div.innerHTML = `
-      <div class="rowLeft">
-        <div class="rank">${idx+1}</div>
-        <div class="who">
-          <div class="nm">${escapeHtml(nm)}</div>
-          <div class="meta">Attempts: ${escapeHtml(String(it.attempts || "-"))} | Mistakes: ${escapeHtml(String(it.mistakes || "-"))}</div>
-        </div>
-      </div>
-      <div class="scoreBox">
-        <div class="sc">${Math.round(sc)}</div>
-        <div class="acc">Acc: ${(acc*100).toFixed(0)}%</div>
-      </div>
-    `;
-    ui.boardList.appendChild(div);
-  });
-}
-
-async function fetchLeaderboard_(){
-  try{
-    const data = await jsonp(`${ENDPOINT}?action=leaderboard`);
-    if(data && data.ok){
-      renderBoard(data.leaderboard || []);
-      ui.boardMeta.textContent = "Last update: " + new Date().toLocaleTimeString();
-    } else {
-      ui.boardMeta.textContent = "Last update: error";
-    }
-  } catch(e){
-    ui.boardMeta.textContent = "Last update: error";
-  }
-}
-
-function startBoardPolling_(){
-  if(boardTimer) clearInterval(boardTimer);
-  fetchLeaderboard_();
-  boardTimer = setInterval(fetchLeaderboard_, 5000);
-}
+ui.nameInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") ui.nameOkBtn.click(); });
 
 /* ======================
-   Send data to Google Sheet (no CORS read needed)
+   Certificate
 ====================== */
-function sendBeaconOrFetch_(params){
-  const body = new URLSearchParams(params).toString();
-
-  // best: sendBeacon
-  if(navigator.sendBeacon){
-    const blob = new Blob([body], { type: "application/x-www-form-urlencoded" });
-    return navigator.sendBeacon(ENDPOINT, blob);
-  }
-
-  // fallback: fetch no-cors
-  fetch(ENDPOINT, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body
-  }).catch(()=>{});
-  return true;
-}
-
 function computeAvgAccuracy_(){
   return attempts ? (accuracySum / attempts) : 0;
 }
-
-function sendScoreToSheet_(partial=false){
-  // Avoid spamming: only send on correct or finish.
-  const avgAcc = computeAvgAccuracy_();
-  const payload = {
-    type: "score",
-    player,
-    totalScore: Math.round(totalScore),
-    avgAccuracy: Number(avgAcc.toFixed(4)),
-    attempts,
-    mistakes,
-    ua: navigator.userAgent
-  };
-
-  sendBeaconOrFetch_(payload);
-
-  // Update leaderboard soon
-  if(partial){
-    setTimeout(fetchLeaderboard_, 900);
-  } else {
-    setTimeout(fetchLeaderboard_, 1200);
-  }
-}
-
-/* ======================
-   End form + certificate
-====================== */
-function getFitValue_(){
-  const radios = ui.fitChoices.querySelectorAll("input[name='fit']");
-  for(const r of radios){ if(r.checked) return r.value; }
-  return "";
-}
-
-function submitFeedback_(){
-  const fit = getFitValue_();
-  const improve = ui.improveBox.value.trim();
-
-  if(!fit){
-    ui.formNote.textContent = "Bạn chưa chọn mức độ phù hợp.";
-    return;
-  }
-  if(!improve){
-    ui.formNote.textContent = "Mục cải thiện là bắt buộc.";
-    return;
-  }
-
-  const avgAcc = computeAvgAccuracy_();
-  const payload = {
-    type: "feedback",
-    player,
-    fit,
-    improve,
-    totalScore: Math.round(totalScore),
-    avgAccuracy: Number(avgAcc.toFixed(4)),
-    attempts,
-    mistakes,
-    ua: navigator.userAgent
-  };
-
-  sendBeaconOrFetch_(payload);
-
-  ui.formNote.textContent = "Đã gửi form. Leaderboard sẽ cập nhật và bạn có thể tạo certificate.";
-  ui.makeCertBtn.disabled = false;
-
-  setTimeout(fetchLeaderboard_, 1200);
-}
-
-ui.submitFormBtn.addEventListener("click", submitFeedback_);
 
 function drawCertificate_(){
   const c = ui.certCanvas;
@@ -1596,12 +1250,10 @@ function drawCertificate_(){
   const scoreText = `${Math.round(totalScore)} pts`;
   const accText = `${Math.round(avgAcc * 100)}%`;
 
-  // Background
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0,0,W,H);
 
-  // Border
   ctx.lineWidth = 18;
   ctx.strokeStyle = "#0f1733";
   ctx.strokeRect(24, 24, W-48, H-48);
@@ -1610,7 +1262,6 @@ function drawCertificate_(){
   ctx.strokeStyle = "#ffb020";
   ctx.strokeRect(52, 52, W-104, H-104);
 
-  // Subtle pattern
   ctx.save();
   ctx.globalAlpha = 0.06;
   ctx.fillStyle = "#64d2ff";
@@ -1621,7 +1272,6 @@ function drawCertificate_(){
   }
   ctx.restore();
 
-  // Header
   ctx.textAlign = "center";
   ctx.fillStyle = "#0f1733";
   ctx.font = "700 44px 'Playfair Display', serif";
@@ -1631,16 +1281,14 @@ function drawCertificate_(){
   ctx.fillStyle = "#111827";
   ctx.fillText("English for Tourism - Restaurant Service Speaking Game", W/2, 220);
 
-  // Name
   ctx.fillStyle = "#0f1733";
   ctx.font = "900 54px Poppins, sans-serif";
-  ctx.fillText(player.toUpperCase(), W/2, 335);
+  ctx.fillText((player || "STUDENT").toUpperCase(), W/2, 335);
 
   ctx.font = "500 24px Poppins, sans-serif";
   ctx.fillStyle = "#374151";
   ctx.fillText("has successfully completed all service scenarios.", W/2, 385);
 
-  // Stats
   const boxW = 980, boxH = 170;
   const bx = (W - boxW)/2, by = 455;
   ctx.fillStyle = "#0f1733";
@@ -1662,7 +1310,6 @@ function drawCertificate_(){
   ctx.fillText(scoreText, bx + boxW*0.25, by + 125);
   ctx.fillText(accText, bx + boxW*0.75, by + 125);
 
-  // Footer
   ctx.font = "500 18px Poppins, sans-serif";
   ctx.fillStyle = "#6b7280";
   const now = new Date();
@@ -1672,7 +1319,6 @@ function drawCertificate_(){
   ctx.fillStyle = "#0f1733";
   ctx.fillText("Lesson 4 - Restaurant Service", W/2, H - 90);
 
-  // Seal
   ctx.save();
   ctx.translate(W - 220, H - 210);
   ctx.rotate(-0.12);
@@ -1687,71 +1333,28 @@ function drawCertificate_(){
   ctx.fillText("PASSED", 0, 8);
   ctx.restore();
 
-  // Download link
   const url = c.toDataURL("image/png");
   ui.downloadCertBtn.href = url;
   ui.downloadCertBtn.style.display = "inline-flex";
 }
 
 ui.makeCertBtn.addEventListener("click", ()=>{
+  if(!player){
+    openNameModal_("Enter your name", "Required to generate certificate.");
+    return;
+  }
   ui.certArea.classList.add("show");
   drawCertificate_();
 });
 
 /* ======================
-   Start flow
+   Init
 ====================== */
-function startGameWithName_(){
-  const nm = ui.nameInput.value.trim();
-  if(!nm){
-    ui.nameInput.focus();
-    return;
-  }
-
-  player = nm;
-  ui.playerLabel.textContent = player;
-  ui.nameOverlay.style.display = "none";
-
-  // reset
-  current = 0;
-  locked = false;
-  totalScore = 0;
-  attempts = 0;
-  mistakes = 0;
-  correctCount = 0;
-  accuracySum = 0;
-  lastFinalScore = 0;
-  finished = false;
-
+(function init(){
+  ui.playerLabel.textContent = player || "Player";
   ui.endWrap.classList.remove("show");
-  ui.formNote.textContent = "";
-  ui.improveBox.value = "";
-  ui.makeCertBtn.disabled = true;
-  ui.downloadCertBtn.style.display = "none";
-  ui.certArea.classList.remove("show");
-
-  // init mic + render
   initSpeech();
   renderLevel();
-
-  // leaderboard
-  startBoardPolling_();
-}
-
-ui.startBtn.addEventListener("click", startGameWithName_);
-ui.nameInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") startGameWithName_(); });
-
-/* ======================
-   Auto check mic status label
-====================== */
-(function(){
-  if(!SpeechRecognition){
-    setMicStatus("Mic: not supported", false);
-  } else {
-    setMicStatus("Mic: ready", true);
-  }
-  renderBoard([]);
-  ui.boardMeta.textContent = "Last update: -";
 })();
 </script>
 </body>
