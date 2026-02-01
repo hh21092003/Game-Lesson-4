@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Restaurant Service Speaking Game</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#070a16;
@@ -22,6 +24,7 @@
 
       --radius:18px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
@@ -40,7 +43,7 @@
     }
 
     .app{
-      width:min(1040px, 100%);
+      width:min(1120px, 100%);
       display:grid;
       grid-template-columns: 1fr;
       gap:16px;
@@ -76,8 +79,7 @@
 
     .logo{
       width:44px;height:44px;border-radius:14px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,209,102,.95), rgba(123,223,242,.65));
+      background: radial-gradient(circle at 30% 30%, rgba(255,209,102,.95), rgba(123,223,242,.65));
       display:grid;place-items:center;
       font-weight:900;
       color:#070a16;
@@ -85,17 +87,8 @@
       box-shadow: 0 12px 30px rgba(0,0,0,.25);
     }
 
-    .brand h1{
-      margin:0;
-      font-size:18px;
-      line-height:1.2;
-    }
-    .brand p{
-      margin:4px 0 0;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.35;
-    }
+    .brand h1{ margin:0; font-size:18px; line-height:1.2; }
+    .brand p{ margin:4px 0 0; font-size:12px; color:var(--muted); line-height:1.35; }
 
     .rightTools{
       display:flex;
@@ -157,7 +150,7 @@
     }
     .lvlTxt{
       font-size:12px;color:var(--muted);
-      min-width:140px;text-align:right;
+      min-width:160px;text-align:right;
     }
 
     .topRow2{
@@ -176,7 +169,7 @@
       border-radius:16px;
       background: rgba(255,255,255,.04);
       border:1px solid var(--line);
-      min-width:280px;
+      min-width:320px;
     }
     .playerBadge{
       width:40px;height:40px;border-radius:14px;
@@ -185,10 +178,7 @@
       border:1px solid rgba(255,255,255,.16);
       font-size:18px;
     }
-    .playerMeta{
-      line-height:1.2;
-      flex:1;
-    }
+    .playerMeta{ line-height:1.2; flex:1; }
     .playerMeta b{ display:block; font-size:13px; }
     .playerMeta span{ display:block; font-size:12px; color:var(--muted); margin-top:4px; }
 
@@ -206,7 +196,7 @@
       border:1px solid var(--line);
       font-size:12px;
       color: rgba(237,240,255,.92);
-      min-width:140px;
+      min-width:150px;
       text-align:center;
     }
     .scorePill b{ font-size:14px; display:block; margin-top:2px; }
@@ -215,17 +205,16 @@
 
     .gridMain{
       display:grid;
-      grid-template-columns: 1fr 340px;
+      grid-template-columns: 1fr 360px;
       gap:14px;
       align-items:start;
     }
-    @media (max-width: 980px){
+    @media (max-width: 1020px){
       .gridMain{ grid-template-columns: 1fr; }
     }
 
     .scenario{
-      background:
-        linear-gradient(180deg, rgba(255,209,102,.13), rgba(255,209,102,.05));
+      background: linear-gradient(180deg, rgba(255,209,102,.13), rgba(255,209,102,.05));
       border:1px solid rgba(255,209,102,.22);
       border-radius:16px;
       padding:14px 14px 12px;
@@ -233,23 +222,12 @@
       position:relative;
       overflow:hidden;
     }
-    .scenario:before{
-      content:"";
-      position:absolute;
-      inset:-60px -100px auto auto;
-      width:220px;height:220px;
-      background: radial-gradient(circle, rgba(123,223,242,.18), transparent 60%);
-      transform: rotate(18deg);
-      pointer-events:none;
-    }
-
     .scenarioTop{
       display:flex;
       gap:10px;
       align-items:flex-start;
       justify-content:space-between;
     }
-
     .scenario h2{
       margin:0;
       font-size:16px;
@@ -304,25 +282,10 @@
       font-size:18px;
       flex:0 0 auto;
     }
-    .qTitle .text{
-      flex:1;
-      line-height:1.35;
-    }
-    .qTitle .text b{
-      display:block;
-      font-size:14px;
-      margin-top:1px;
-    }
-    .qTitle .text .vi{
-      margin-top:4px;
-      font-size:12px;
-      color: rgba(185,194,230,.95);
-    }
-    .qTitle .text .hint{
-      margin-top:6px;
-      font-size:12px;
-      color:var(--muted);
-    }
+    .qTitle .text{ flex:1; line-height:1.35; }
+    .qTitle .text b{ display:block; font-size:14px; margin-top:1px; }
+    .qTitle .text .vi{ margin-top:4px; font-size:12px; color: rgba(185,194,230,.95); }
+    .qTitle .text .hint{ margin-top:6px; font-size:12px; color:var(--muted); }
 
     .options{ display:grid; gap:10px; }
 
@@ -523,7 +486,6 @@
       min-width:160px;
     }
 
-    /* Leaderboard */
     .board{
       background: rgba(255,255,255,.04);
       border:1px solid var(--line);
@@ -541,10 +503,7 @@
     }
     .boardTop b{ font-size:13px; }
     .boardTop .mini{ font-size:12px; color:var(--muted); }
-    .boardList{
-      display:grid;
-      gap:10px;
-    }
+    .boardList{ display:grid; gap:10px; }
     .row{
       display:flex;
       gap:10px;
@@ -564,10 +523,7 @@
     .rowMain{ flex:1; line-height:1.2; }
     .rowMain b{ display:block; font-size:12px; }
     .rowMain span{ display:block; margin-top:4px; font-size:11px; color:var(--muted); }
-    .rowScore{
-      text-align:right;
-      min-width:84px;
-    }
+    .rowScore{ text-align:right; min-width:92px; }
     .rowScore b{ display:block; font-size:14px; }
     .rowScore span{ display:block; margin-top:4px; font-size:11px; color:var(--muted); }
 
@@ -576,35 +532,31 @@
       background: rgba(46,229,157,.08);
     }
 
-    /* Modal name */
+    .screen{ display:block; }
+    .hidden{ display:none !important; }
+
+    /* Name modal - FIX opacity 100% */
     .modalWrap{
       position:fixed;
       inset:0;
-      background: rgba(0,0,0,.55);
+      background: rgba(0,0,0,0.92);
       display:none;
       align-items:center;
       justify-content:center;
       padding:18px;
-      z-index:50;
+      z-index:999;
     }
     .modal{
       width:min(520px, 100%);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border:1px solid var(--line);
+      background: #0f1633;
+      border:1px solid rgba(255,255,255,0.14);
       border-radius:18px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 18px 60px rgba(0,0,0,.65);
       padding:18px;
+      opacity: 1;
     }
-    .modal h3{
-      margin:0;
-      font-size:16px;
-    }
-    .modal p{
-      margin:8px 0 14px;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.45;
-    }
+    .modal h3{ margin:0; font-size:16px; }
+    .modal p{ margin:8px 0 14px; font-size:12px; color:var(--muted); line-height:1.45; }
     .modal .row2{
       display:flex;
       gap:10px;
@@ -634,7 +586,6 @@
       transition: transform .12s ease;
     }
     .modal .startBtn:hover{ transform: translateY(-1px); }
-
     .modal .smallBtns{
       margin-top:12px;
       display:flex;
@@ -660,6 +611,95 @@
       font-weight:900;
       cursor:pointer;
     }
+
+    /* End form + Certificate */
+    .card{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      margin-bottom:14px;
+    }
+    .card h3{ margin:0; font-size:14px; }
+    .card p{ margin:8px 0 0; font-size:12px; color:var(--muted); line-height:1.45; }
+    .formRow{ margin-top:12px; display:grid; gap:10px; }
+    .radioRow{ display:flex; gap:10px; flex-wrap:wrap; }
+    .radioPill{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      cursor:pointer;
+      user-select:none;
+    }
+    .radioPill input{ accent-color: var(--ok); }
+    .textarea{
+      width:100%;
+      min-height:110px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      padding:12px 12px;
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+      font-size:13px;
+      line-height:1.45;
+      resize:vertical;
+    }
+    .submitBtn{
+      border:none;
+      border-radius:14px;
+      padding:12px 14px;
+      background: linear-gradient(180deg, rgba(46,229,157,.95), rgba(46,229,157,.62));
+      color:#070a16;
+      font-weight:900;
+      cursor:pointer;
+      min-width:220px;
+      transition: transform .12s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .submitBtn:hover{ transform: translateY(-1px); }
+    .submitBtn:disabled{ opacity:.6; cursor:not-allowed; transform:none; }
+
+    .certWrap{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    canvas{
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #ffffff;
+    }
+
+    .downloadBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,209,102,.95), rgba(255,209,102,.62));
+      color:#070a16;
+      font-weight:900;
+      text-decoration:none;
+      border:none;
+      cursor:pointer;
+    }
+
+    .smallNote{ font-size:12px; color: var(--muted); margin-top:8px; line-height:1.45; }
   </style>
 </head>
 
@@ -678,6 +718,7 @@
 
           <div class="rightTools">
             <div class="pill" id="techPill">🎙️ Speech: checking…</div>
+            <div class="pill" id="syncPill">🔄 Leaderboard: local</div>
             <button class="btnSmall" id="changePlayerBtn" title="Change player">👤 Change player</button>
             <button class="btnSmall" id="resetBoardBtn" title="Reset leaderboard">🧹 Reset board</button>
           </div>
@@ -693,7 +734,7 @@
             <div class="playerBadge">🎧</div>
             <div class="playerMeta">
               <b id="playerName">Player: -</b>
-              <span id="playerHint">Enter your name to start. Your score is saved on this device.</span>
+              <span id="playerHint">Enter your name to start. Score can sync if Firebase is enabled.</span>
             </div>
           </div>
 
@@ -707,7 +748,8 @@
 
       <div class="content">
         <div class="gridMain">
-          <div>
+          <!-- GAME SCREEN -->
+          <div class="screen" id="gameScreen">
             <div class="scenario">
               <div class="scenarioTop">
                 <div>
@@ -732,18 +774,16 @@
 
             <div class="controls">
               <div class="micRow">
-                <button class="micBtn" id="micBtn" title="Tap to talk">
-                  🎙️ Tap to Talk
-                </button>
+                <button class="micBtn" id="micBtn" title="Tap to talk">🎙️ Tap to Talk</button>
                 <div class="hintMini">
                   <div class="k">Quick tips</div>
-                  Read slowly, keep a short pause between words.<br/>
-                  Best on <span class="k">Chrome</span> or <span class="k">Edge</span> with <span class="k">HTTPS</span>.
+                  Read slowly. Pause between words.<br/>
+                  Best on <span class="k">Chrome</span> or <span class="k">Edge</span>.
                 </div>
               </div>
 
               <div class="typeRow">
-                <input id="typeInput" type="text" placeholder='Type one option if mic fails…' />
+                <input id="typeInput" type="text" placeholder="Type one option if mic fails…" />
                 <button id="checkBtn">Check</button>
               </div>
 
@@ -764,11 +804,60 @@
             </div>
           </div>
 
+          <!-- END SCREEN -->
+          <div class="screen hidden" id="endScreen">
+            <div class="card">
+              <h3>📝 Post-class feedback form</h3>
+              <p>Điền form để nộp bài và nhận certificate PNG. Mục (2) bắt buộc.</p>
+
+              <div class="formRow">
+                <div>
+                  <div class="k">1) Bạn thấy các hoạt động của lớp có phù hợp với bạn?</div>
+                  <div class="radioRow">
+                    <label class="radioPill"><input type="radio" name="fit" value="Phù hợp"> Phù hợp</label>
+                    <label class="radioPill"><input type="radio" name="fit" value="Ổn"> Ổn</label>
+                    <label class="radioPill"><input type="radio" name="fit" value="Không phù hợp"> Không phù hợp</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="k">2) Bạn muốn giáo viên cải thiện thêm gì cho lớp học? (bắt buộc)</div>
+                  <textarea class="textarea" id="improveText" placeholder="Viết cụ thể: hoạt động nào, phần nào khó, bạn muốn đổi gì..."></textarea>
+                </div>
+
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                  <button class="submitBtn" id="submitFeedbackBtn">✅ Submit and Generate PNG Certificate</button>
+                  <div class="k" id="submitHint">Submit xong sẽ hiện certificate và leaderboard</div>
+                </div>
+
+                <div class="status hidden" id="formStatus"></div>
+              </div>
+            </div>
+
+            <div class="certWrap hidden" id="certArea">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+                <div class="k" id="certMeta">Certificate preview</div>
+                <button class="btnSmall" id="playAgainBtn">🔁 Play again</button>
+              </div>
+
+              <div style="margin-top:12px;">
+                <canvas id="certCanvas" width="1200" height="900"></canvas>
+                <div>
+                  <a class="downloadBtn" id="downloadCert" download="Certificate.png">⬇️ Download PNG</a>
+                </div>
+                <div class="smallNote">
+                  Nếu chữ chưa đúng font, đợi 1-2 giây rồi bấm Download lại. Trình duyệt cần load font xong mới vẽ canvas đẹp.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LEADERBOARD -->
           <aside class="board">
             <div class="boardTop">
               <div>
                 <b>🏆 Leaderboard</b>
-                <div class="mini">Real time - sorted by total score</div>
+                <div class="mini">Sorted by total score, tie-break by avg accuracy</div>
               </div>
               <div class="k" id="boardCount">0 players</div>
             </div>
@@ -783,10 +872,7 @@
   <div class="modalWrap" id="modalWrap">
     <div class="modal">
       <h3>Enter player name</h3>
-      <p>
-        This game scores by accuracy. Saying closer to the target line gives more points.
-        Scores are saved on this device.
-      </p>
+      <p>Score uses accuracy. Say closer to the target line to get higher points.</p>
       <div class="row2">
         <input id="nameInput" type="text" placeholder="Your name (e.g., Minh, Lan, Alex)"/>
         <button class="startBtn" id="startBtn">Start</button>
@@ -800,7 +886,24 @@
 
 <script>
 /* ======================
-   1) DATA
+   0) Realtime leaderboard option
+   - GitHub Pages static: muốn realtime giữa nhiều máy => bật Firebase.
+====================== */
+const REALTIME_MODE = "local"; // "local" | "firebase"
+const FIREBASE_CONFIG = {
+  // Nếu dùng Firebase: paste config vào đây, rồi đổi REALTIME_MODE="firebase"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
+};
+
+let firebaseApi = null;
+
+/* ======================
+   1) LEVELS
 ====================== */
 const LEVELS = [
   {
@@ -882,15 +985,15 @@ const LEVELS = [
         accept:{
           required:[
             ["table"],
-            ["beef","steak"],
+            ["beefsteak"],
             ["medium","rare"],
             ["please"]
           ],
           anyOf:[["two"],["2"],["to"]],
           aliases:[
-            /table\s*5.*(two|2).*beef\s*steak.*medium\s*rare.*please/i,
-            /table\s*52.*beef\s*steak.*medium\s*rare.*please/i,
-            /table\s*5.*beef\s*steak.*medium\s*rare.*please/i
+            /table\s*5.*(two|2|to).*beef\s*steak.*medium\s*rare.*please/i,
+            /table\s*5.*(two|2|to).*beefsteaks.*medium\s*rare.*please/i,
+            /table\s*52.*beef\s*steak.*medium\s*rare.*please/i
           ]
         }
       },
@@ -969,17 +1072,9 @@ let current = 0;
 let locked = false;
 
 /* ======================
-   2) Storage for leaderboard
-   Structure:
-   scores = {
-     players: {
-       "Lan": { best:[...], attempts:0, total:0, avg:0 },
-       ...
-     },
-     lastPlayer: "Lan"
-   }
+   2) Local storage (fallback)
 ====================== */
-const STORE_KEY = "rs_speaking_leaderboard_v1";
+const STORE_KEY = "rs_speaking_leaderboard_v3";
 
 function loadStore(){
   try{
@@ -996,7 +1091,6 @@ function loadStore(){
 function saveStore(store){
   localStorage.setItem(STORE_KEY, JSON.stringify(store));
 }
-
 let store = loadStore();
 let player = store.lastPlayer || "";
 
@@ -1006,6 +1100,7 @@ let player = store.lastPlayer || "";
 const $ = (id) => document.getElementById(id);
 const ui = {
   techPill: $("techPill"),
+  syncPill: $("syncPill"),
   changePlayerBtn: $("changePlayerBtn"),
   resetBoardBtn: $("resetBoardBtn"),
 
@@ -1017,6 +1112,9 @@ const ui = {
   myTotal: $("myTotal"),
   myAvg: $("myAvg"),
   myAtt: $("myAtt"),
+
+  gameScreen: $("gameScreen"),
+  endScreen: $("endScreen"),
 
   lvlIcon: $("lvlIcon"),
   lvlTitle: $("lvlTitle"),
@@ -1042,11 +1140,20 @@ const ui = {
   nameInput: $("nameInput"),
   startBtn: $("startBtn"),
   continueBtn: $("continueBtn"),
-  clearAllBtn: $("clearAllBtn")
+  clearAllBtn: $("clearAllBtn"),
+
+  improveText: $("improveText"),
+  submitFeedbackBtn: $("submitFeedbackBtn"),
+  formStatus: $("formStatus"),
+
+  certArea: $("certArea"),
+  certCanvas: $("certCanvas"),
+  downloadCert: $("downloadCert"),
+  playAgainBtn: $("playAgainBtn"),
 };
 
 /* ======================
-   4) Speech Recognition
+   4) Speech Recognition - stable, less lag
 ====================== */
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let isListening = false;
@@ -1086,7 +1193,7 @@ function startSpeech(){
   clearTimeout(listenTimeout);
   listenTimeout = setTimeout(() => {
     try{ rec.stop(); } catch(e){}
-  }, 7000);
+  }, 6500);
 
   rec.onresult = (event) => {
     clearTimeout(listenTimeout);
@@ -1103,8 +1210,9 @@ function startSpeech(){
 
     try{ rec.stop(); } catch(e){}
 
-    if(spoken) checkAnswer(spoken, conf);
+    if(spoken) checkAnswer(spoken);
     else {
+      bumpAttemptOnly();
       ui.status.className = "status bad";
       ui.status.textContent = "No speech detected. Try again or type.";
     }
@@ -1143,7 +1251,7 @@ function startSpeech(){
 }
 
 /* ======================
-   5) Normalization and scoring
+   5) Matching logic - tolerant, accuracy-based
 ====================== */
 const NUM_WORDS = new Map([
   ["zero","0"],["one","1"],["two","2"],["to","2"],["too","2"],["three","3"],["four","4"],["for","4"],["five","5"],
@@ -1176,9 +1284,8 @@ function normalizeTokens(s){
   return out;
 }
 
-function levenshtein(a,b){
-  const an = normalize(a), bn = normalize(b);
-  const m = an.length, n = bn.length;
+function levenshteinStr(a,b){
+  const m = a.length, n = b.length;
   if(m === 0) return n;
   if(n === 0) return m;
   const dp = Array.from({length:m+1}, ()=> new Array(n+1).fill(0));
@@ -1186,8 +1293,12 @@ function levenshtein(a,b){
   for(let j=0;j<=n;j++) dp[0][j]=j;
   for(let i=1;i<=m;i++){
     for(let j=1;j<=n;j++){
-      const cost = an[i-1] === bn[j-1] ? 0 : 1;
-      dp[i][j] = Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost);
+      const cost = a[i-1] === b[j-1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i-1][j] + 1,
+        dp[i][j-1] + 1,
+        dp[i-1][j-1] + cost
+      );
     }
   }
   return dp[m][n];
@@ -1196,7 +1307,7 @@ function levenshtein(a,b){
 function similarityText(a,b){
   const an = normalize(a), bn = normalize(b);
   const maxLen = Math.max(an.length, bn.length) || 1;
-  const lev = levenshtein(an, bn);
+  const lev = levenshteinStr(an, bn);
   return Math.max(0, Math.min(1, 1 - (lev / maxLen)));
 }
 
@@ -1232,7 +1343,7 @@ function bestMatch(inputRaw, options){
   const inputTokens = normalizeTokens(inputRaw);
   const inputNorm = inputTokens.join(" ");
 
-  let best = { opt:null, score:0, sim:0, cov:0, alias:false };
+  let best = { opt:null, score:0 };
 
   for(const opt of options){
     const optTokens = normalizeTokens(opt.text);
@@ -1244,59 +1355,65 @@ function bestMatch(inputRaw, options){
 
     const hasAccept = !!opt.accept;
     const blended = hasAccept ? (0.45*sim + 0.55*cov) : sim;
-
     const score = alias ? Math.max(0.90, blended) : blended;
 
     if(score > best.score){
-      best = { opt, score, sim, cov, alias };
+      best = { opt, score };
     }
   }
   return best;
 }
 
 /* ======================
-   6) Leaderboard engine
+   6) Leaderboard model
+   - local: localStorage
+   - firebase: firestore realtime (optional)
 ====================== */
-function ensurePlayer(name){
+function ensurePlayerLocal(name){
   if(!store.players[name]){
     store.players[name] = {
       best: new Array(LEVELS.length).fill(0),
-      attempts: 0
+      attempts: 0,
+      feedback: []
     };
+  } else {
+    if(!Array.isArray(store.players[name].best)) store.players[name].best = new Array(LEVELS.length).fill(0);
+    if(typeof store.players[name].attempts !== "number") store.players[name].attempts = 0;
+    if(!Array.isArray(store.players[name].feedback)) store.players[name].feedback = [];
   }
 }
 
-function computeStats(p){
-  const best = p.best || [];
+function computeStats(bestArr, attempts){
+  const best = bestArr || [];
   const total = best.reduce((a,b)=>a + Math.round(b*100), 0);
   const avg = best.length ? (best.reduce((a,b)=>a+b,0) / best.length) : 0;
-  return { total, avg };
+  return { total, avg, attempts: attempts || 0 };
 }
 
-function updatePlayerUI(){
+function updatePlayerUI_Local(){
   if(!player){
     ui.playerName.textContent = "Player: -";
-    ui.playerHint.textContent = "Enter your name to start. Your score is saved on this device.";
+    ui.playerHint.textContent = "Enter your name to start.";
     ui.myTotal.textContent = "0";
     ui.myAvg.textContent = "0.00";
     ui.myAtt.textContent = "0";
     return;
   }
-  ensurePlayer(player);
+  ensurePlayerLocal(player);
   const p = store.players[player];
-  const { total, avg } = computeStats(p);
+  const s = computeStats(p.best, p.attempts);
 
   ui.playerName.textContent = "Player: " + player;
-  ui.playerHint.textContent = "Score uses accuracy. Try to speak closer to the target line.";
-  ui.myTotal.textContent = String(total);
-  ui.myAvg.textContent = avg.toFixed(2);
-  ui.myAtt.textContent = String(p.attempts || 0);
+  ui.playerHint.textContent = (REALTIME_MODE === "firebase") ? "Realtime leaderboard enabled." : "Local leaderboard on this device.";
+  ui.myTotal.textContent = String(s.total);
+  ui.myAvg.textContent = s.avg.toFixed(2);
+  ui.myAtt.textContent = String(s.attempts);
 }
 
-function renderLeaderboard(){
+function renderLeaderboard_Local(){
   const entries = Object.entries(store.players).map(([name, p])=>{
-    const { total, avg } = computeStats(p);
-    return { name, total, avg, attempts: p.attempts || 0 };
+    const s = computeStats(p.best, p.attempts);
+    return { name, total: s.total, avg: s.avg, attempts: s.attempts };
   });
 
   entries.sort((a,b)=>{
@@ -1306,8 +1423,8 @@ function renderLeaderboard(){
   });
 
   ui.boardCount.textContent = entries.length + " players";
-
   ui.boardList.innerHTML = "";
+
   if(entries.length === 0){
     const div = document.createElement("div");
     div.className = "row";
@@ -1339,25 +1456,40 @@ function renderLeaderboard(){
   });
 }
 
+function bumpAttemptOnly(){
+  if(!player) return;
+  if(REALTIME_MODE === "firebase" && firebaseApi){
+    firebaseApi.bumpAttempt(player).catch(()=>{});
+  } else {
+    ensurePlayerLocal(player);
+    store.players[player].attempts += 1;
+    store.lastPlayer = player;
+    saveStore(store);
+    updatePlayerUI_Local();
+    renderLeaderboard_Local();
+  }
+}
+
 function awardScore(levelIndex, accuracyScore){
   if(!player) return;
 
-  ensurePlayer(player);
-  const p = store.players[player];
-
-  p.attempts = (p.attempts || 0) + 1;
-
-  // Keep best score for that level
-  const prev = p.best[levelIndex] || 0;
-  if(accuracyScore > prev){
-    p.best[levelIndex] = accuracyScore;
+  if(REALTIME_MODE === "firebase" && firebaseApi){
+    firebaseApi.awardScore(player, levelIndex, accuracyScore).catch(()=>{});
+    return;
   }
+
+  ensurePlayerLocal(player);
+  const p = store.players[player];
+  p.attempts += 1;
+
+  const prev = p.best[levelIndex] || 0;
+  if(accuracyScore > prev) p.best[levelIndex] = accuracyScore;
 
   store.lastPlayer = player;
   saveStore(store);
 
-  updatePlayerUI();
-  renderLeaderboard();
+  updatePlayerUI_Local();
+  renderLeaderboard_Local();
 }
 
 /* ======================
@@ -1375,7 +1507,6 @@ function escapeHtml(str){
 function renderLevel(){
   locked = false;
   ui.nextBtn.classList.remove("show");
-  ui.nextBtn.style.display = "none";
   ui.status.className = "status";
   ui.status.textContent = "Ready. Tap the mic and read one option.";
   ui.transcript.textContent = "Waiting…";
@@ -1411,12 +1542,12 @@ function renderLevel(){
 
 /* ======================
    8) Game logic
-   Scoring by accuracy:
-   - When correct and passes threshold, award accuracyScore (0-1)
-   - Show accuracyScore in status
+   - User vẫn bấm Next
+   - Nhưng nói xong là check ngay, không lag kiểu chờ.
 ====================== */
-function checkAnswer(inputRaw, conf=null){
+function checkAnswer(inputRaw){
   if(locked) return;
+
   if(!player){
     openNameModal(true);
     ui.status.className = "status bad";
@@ -1427,33 +1558,25 @@ function checkAnswer(inputRaw, conf=null){
   const L = LEVELS[current];
   const { opt, score } = bestMatch(inputRaw, L.options);
 
-  const passMain = 0.80;
-  const passLow = 0.76;
+  const PASS_SCORE = 0.78;
 
   if(!opt || score < 0.60){
-    store.players[player] && (store.players[player].attempts = (store.players[player].attempts || 0) + 1);
-    saveStore(store);
-    updatePlayerUI();
-    renderLeaderboard();
-
+    bumpAttemptOnly();
     ui.status.className = "status bad";
     ui.status.textContent = "Not matched. Read one option more clearly, or type it.";
     return;
   }
 
   if(opt.correct){
-    const pass = score >= passMain || score >= passLow;
-    if(pass){
+    if(score >= PASS_SCORE){
       locked = true;
 
-      // Award points
       awardScore(current, score);
 
       const pts = Math.round(score * 100);
       ui.status.className = "status ok";
       ui.status.textContent = `Correct. Accuracy ${score.toFixed(2)} - +${pts} points. Click Next to continue.`;
 
-      ui.nextBtn.style.display = "inline-flex";
       ui.nextBtn.classList.add("show");
       ui.checkBtn.disabled = true;
       ui.typeInput.disabled = true;
@@ -1461,42 +1584,36 @@ function checkAnswer(inputRaw, conf=null){
 
       ui.fill.style.width = `${((current+1) / LEVELS.length) * 100}%`;
       return;
-    } else {
-      store.players[player].attempts = (store.players[player].attempts || 0) + 1;
-      saveStore(store);
-      updatePlayerUI();
-      renderLeaderboard();
-
-      ui.status.className = "status bad";
-      ui.status.textContent = `Close but not clear enough (accuracy ${score.toFixed(2)}). Try again.`;
-      return;
     }
+
+    bumpAttemptOnly();
+    ui.status.className = "status bad";
+    ui.status.textContent = `Close but not clear enough (accuracy ${score.toFixed(2)}). Try again.`;
+    return;
   }
 
-  // wrong option
-  store.players[player].attempts = (store.players[player].attempts || 0) + 1;
-  saveStore(store);
-  updatePlayerUI();
-  renderLeaderboard();
-
+  bumpAttemptOnly();
   ui.status.className = "status bad";
-  if(opt.rude){
-    ui.status.textContent = "Not polite enough!";
-  } else {
-    ui.status.textContent = opt.msg || "Not the best choice. Try again.";
-  }
+  ui.status.textContent = opt.rude ? "Not polite enough!" : (opt.msg || "Not the best choice. Try again.");
+}
+
+function showEndScreen(){
+  ui.gameScreen.classList.add("hidden");
+  ui.endScreen.classList.remove("hidden");
+
+  ui.formStatus.classList.add("hidden");
+  ui.formStatus.textContent = "";
+  ui.formStatus.className = "status hidden";
+
+  ui.certArea.classList.add("hidden");
+  ui.submitFeedbackBtn.disabled = false;
 }
 
 function next(){
   if(current >= LEVELS.length - 1){
-    ui.status.className = "status ok";
-    ui.status.textContent = "Completed. Change player to continue the class game.";
-    ui.fill.style.width = "100%";
     ui.lvlTxt.textContent = "Completed";
-    ui.micBtn.disabled = true;
-    ui.typeInput.disabled = true;
-    ui.checkBtn.disabled = true;
-    ui.nextBtn.style.display = "none";
+    ui.fill.style.width = "100%";
+    showEndScreen();
     return;
   }
   current++;
@@ -1504,7 +1621,150 @@ function next(){
 }
 
 /* ======================
-   9) Modal and controls
+   9) Feedback + Certificate PNG
+====================== */
+function getSelectedFit(){
+  const r = document.querySelector('input[name="fit"]:checked');
+  return r ? r.value : "";
+}
+function nowDateString(){
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+async function drawCertificatePNG(name, total, avg, attempts){
+  const canvas = ui.certCanvas;
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width;
+  const H = canvas.height;
+
+  if(document.fonts && document.fonts.ready){
+    try{ await document.fonts.ready; } catch(e){}
+  }
+
+  ctx.clearRect(0,0,W,H);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = "#0f1733";
+  ctx.lineWidth = 16;
+  ctx.strokeRect(30, 30, W-60, H-60);
+
+  ctx.strokeStyle = "#ffb020";
+  ctx.lineWidth = 4;
+  ctx.strokeRect(55, 55, W-110, H-110);
+
+  ctx.textAlign = "center";
+
+  ctx.fillStyle = "#0f1733";
+  ctx.font = "700 34px 'Times New Roman'";
+  ctx.fillText("TRƯỜNG ĐẠI HỌC SƯ PHẠM HÀ NỘI", W/2, 140);
+
+  ctx.font = "400 26px 'Times New Roman'";
+  ctx.fillText("LỚP VNH-K73 - ENGLISH FOR TOURISM", W/2, 188);
+
+  ctx.fillStyle = "#d35400";
+  ctx.font = "700 84px 'Playfair Display'";
+  ctx.fillText("CHỨNG NHẬN", W/2, 320);
+
+  ctx.fillStyle = "#000000";
+  ctx.font = "italic 28px 'Times New Roman'";
+  ctx.fillText("Chứng nhận sinh viên:", W/2, 390);
+
+  ctx.fillStyle = "#0f1733";
+  ctx.font = "800 64px 'Poppins'";
+  ctx.fillText(String(name || "").toUpperCase(), W/2, 480);
+
+  ctx.fillStyle = "#000000";
+  ctx.font = "400 28px 'Times New Roman'";
+  ctx.fillText("ĐÃ HOÀN THÀNH BÀI THI TÌNH HUỐNG NGHIỆP VỤ NHÀ HÀNG", W/2, 555);
+
+  ctx.fillText("VỚI ĐỘ CHÍNH XÁC TRUNG BÌNH", W/2, 605);
+
+  const avgTxt = (typeof avg === "number") ? avg.toFixed(2) : "0.00";
+  let color = "#000000";
+  if(avg >= 0.92) color = "#27ae60";
+  else if(avg >= 0.85) color = "#2980b9";
+  else if(avg >= 0.78) color = "#8e44ad";
+  else color = "#c0392b";
+
+  ctx.fillStyle = color;
+  ctx.font = "800 54px 'Poppins'";
+  ctx.fillText(avgTxt, W/2, 675);
+
+  ctx.fillStyle = "#555555";
+  ctx.font = "400 24px 'Times New Roman'";
+  ctx.fillText(`Tổng điểm: ${total} - Attempts: ${attempts} - Date: ${nowDateString()}`, W/2, 725);
+
+  ctx.fillStyle = "#000000";
+  ctx.font = "400 24px 'Times New Roman'";
+  ctx.fillText("ANH HOÀNG KHÓ TÍNH", W/4, 820);
+  ctx.fillText("CÔ MINH DỊU DÀNG", (W/4)*3, 820);
+
+  ctx.fillStyle = "#444444";
+  ctx.font = "italic 20px 'Times New Roman'";
+  ctx.fillText("(Đã ký)", W/4, 850);
+  ctx.fillText("(Đã ký)", (W/4)*3, 850);
+
+  const url = canvas.toDataURL("image/png");
+  ui.downloadCert.href = url;
+  ui.downloadCert.download = `Certificate_${String(name || "Player").replace(/\s+/g,"_")}.png`;
+}
+
+async function submitFeedback(){
+  if(!player){
+    openNameModal(true);
+    return;
+  }
+
+  const fit = getSelectedFit();
+  const improve = (ui.improveText.value || "").trim();
+
+  ui.formStatus.classList.remove("hidden");
+
+  if(!improve){
+    ui.formStatus.className = "status bad";
+    ui.formStatus.textContent = "Mục (2) bắt buộc. Hãy viết phần bạn muốn giáo viên cải thiện.";
+    return;
+  }
+
+  let bestArr, attempts;
+  if(REALTIME_MODE === "firebase" && firebaseApi){
+    const snap = await firebaseApi.getPlayerSnapshot(player);
+    bestArr = snap.best || new Array(LEVELS.length).fill(0);
+    attempts = snap.attempts || 0;
+    await firebaseApi.saveFeedback(player, { fit: fit || "(no selection)", improve, at: new Date().toISOString() });
+  } else {
+    ensurePlayerLocal(player);
+    store.players[player].feedback.push({ fit: fit || "(no selection)", improve, at: new Date().toISOString() });
+    saveStore(store);
+    bestArr = store.players[player].best;
+    attempts = store.players[player].attempts;
+  }
+
+  const stats = computeStats(bestArr, attempts);
+
+  ui.formStatus.className = "status ok";
+  ui.formStatus.textContent = "Submitted. Certificate generated below.";
+
+  ui.submitFeedbackBtn.disabled = true;
+
+  ui.certArea.classList.remove("hidden");
+  await drawCertificatePNG(player, stats.total, stats.avg, stats.attempts);
+
+  // refresh leaderboard after submit
+  if(REALTIME_MODE !== "firebase" || !firebaseApi){
+    updatePlayerUI_Local();
+    renderLeaderboard_Local();
+  }
+}
+
+/* ======================
+   10) Modal
 ====================== */
 function openNameModal(allowContinue){
   ui.modalWrap.style.display = "flex";
@@ -1512,24 +1772,205 @@ function openNameModal(allowContinue){
   ui.continueBtn.style.display = allowContinue ? "inline-flex" : "none";
   ui.nameInput.focus();
 }
-
 function closeNameModal(){
   ui.modalWrap.style.display = "none";
 }
-
 function setPlayer(name){
   const n = (name || "").trim();
   if(!n) return;
 
   player = n;
-  ensurePlayer(player);
-  store.lastPlayer = player;
-  saveStore(store);
 
-  updatePlayerUI();
-  renderLeaderboard();
+  if(REALTIME_MODE === "firebase" && firebaseApi){
+    firebaseApi.ensurePlayer(player).catch(()=>{});
+    ui.syncPill.textContent = "🔄 Leaderboard: realtime";
+  } else {
+    ensurePlayerLocal(player);
+    store.lastPlayer = player;
+    saveStore(store);
+    ui.syncPill.textContent = "🔄 Leaderboard: local";
+  }
+
+  updatePlayerUI_Local();
+  renderLeaderboard_Local();
   closeNameModal();
 }
+
+/* ======================
+   11) Firebase realtime (optional)
+====================== */
+async function initFirebaseIfNeeded(){
+  if(REALTIME_MODE !== "firebase") return;
+
+  const ok = FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.projectId;
+  if(!ok){
+    ui.syncPill.textContent = "🔄 Leaderboard: local (no config)";
+    ui.syncPill.style.borderColor = "rgba(255,93,108,.35)";
+    return;
+  }
+
+  ui.syncPill.textContent = "🔄 Leaderboard: connecting…";
+
+  const modApp = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js");
+  const modFs  = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
+
+  const app = modApp.initializeApp(FIREBASE_CONFIG);
+  const db = modFs.getFirestore(app);
+
+  const playersCol = modFs.collection(db, "rs_players");
+  const feedbackCol = modFs.collection(db, "rs_feedback");
+
+  function safeId(name){
+    return String(name).trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").slice(0, 48) || "player";
+  }
+
+  firebaseApi = {
+    async ensurePlayer(name){
+      const id = safeId(name);
+      const ref = modFs.doc(db, "rs_players", id);
+      const snap = await modFs.getDoc(ref);
+      if(!snap.exists()){
+        await modFs.setDoc(ref, {
+          displayName: name,
+          best: new Array(LEVELS.length).fill(0),
+          attempts: 0,
+          updatedAt: modFs.serverTimestamp()
+        }, { merge: true });
+      }
+      return id;
+    },
+
+    async getPlayerSnapshot(name){
+      const id = safeId(name);
+      const ref = modFs.doc(db, "rs_players", id);
+      const snap = await modFs.getDoc(ref);
+      if(!snap.exists()) return { best: new Array(LEVELS.length).fill(0), attempts: 0 };
+      return snap.data();
+    },
+
+    async bumpAttempt(name){
+      const id = await this.ensurePlayer(name);
+      const ref = modFs.doc(db, "rs_players", id);
+      await modFs.updateDoc(ref, {
+        attempts: modFs.increment(1),
+        updatedAt: modFs.serverTimestamp()
+      });
+    },
+
+    async awardScore(name, levelIndex, accuracyScore){
+      const id = await this.ensurePlayer(name);
+      const ref = modFs.doc(db, "rs_players", id);
+      const snap = await modFs.getDoc(ref);
+      const data = snap.exists() ? snap.data() : { best: new Array(LEVELS.length).fill(0), attempts: 0, displayName:name };
+
+      const best = Array.isArray(data.best) ? data.best : new Array(LEVELS.length).fill(0);
+      const prev = best[levelIndex] || 0;
+      if(accuracyScore > prev) best[levelIndex] = accuracyScore;
+
+      await modFs.setDoc(ref, {
+        displayName: name,
+        best,
+        attempts: (data.attempts || 0) + 1,
+        updatedAt: modFs.serverTimestamp()
+      }, { merge: true });
+    },
+
+    async saveFeedback(name, payload){
+      await modFs.addDoc(feedbackCol, {
+        displayName: name,
+        ...payload,
+        createdAt: modFs.serverTimestamp()
+      });
+    },
+
+    listenLeaderboard(onData){
+      const q = modFs.query(playersCol, modFs.orderBy("updatedAt","desc"));
+      return modFs.onSnapshot(q, (snap)=>{
+        const arr = [];
+        snap.forEach(doc=>{
+          const d = doc.data();
+          const best = Array.isArray(d.best) ? d.best : new Array(LEVELS.length).fill(0);
+          const s = computeStats(best, d.attempts || 0);
+          arr.push({
+            name: d.displayName || "Player",
+            total: s.total,
+            avg: s.avg,
+            attempts: s.attempts
+          });
+        });
+
+        arr.sort((a,b)=>{
+          if(b.total !== a.total) return b.total - a.total;
+          if(b.avg !== a.avg) return b.avg - a.avg;
+          return a.attempts - b.attempts;
+        });
+
+        onData(arr.slice(0, 50));
+      });
+    }
+  };
+
+  ui.syncPill.textContent = "🔄 Leaderboard: realtime";
+  ui.syncPill.style.borderColor = "rgba(46,229,157,.35)";
+
+  firebaseApi.listenLeaderboard((entries)=>{
+    renderLeaderboard_FromEntries(entries);
+    if(player){
+      const me = entries.find(x=>x.name === player);
+      if(me){
+        ui.myTotal.textContent = String(me.total);
+        ui.myAvg.textContent = me.avg.toFixed(2);
+        ui.myAtt.textContent = String(me.attempts);
+      }
+    }
+  });
+}
+
+function renderLeaderboard_FromEntries(entries){
+  ui.boardCount.textContent = entries.length + " players";
+  ui.boardList.innerHTML = "";
+
+  if(entries.length === 0){
+    renderLeaderboard_Local();
+    return;
+  }
+
+  entries.slice(0, 10).forEach((e, idx)=>{
+    const div = document.createElement("div");
+    div.className = "row" + (e.name === player ? " you" : "");
+    const medal = idx===0 ? "🥇" : idx===1 ? "🥈" : idx===2 ? "🥉" : (idx+1);
+    div.innerHTML = `
+      <div class="rank">${medal}</div>
+      <div class="rowMain">
+        <b>${escapeHtml(e.name)}</b>
+        <span>avg ${e.avg.toFixed(2)} - attempts ${e.attempts}</span>
+      </div>
+      <div class="rowScore">
+        <b>${e.total}</b>
+        <span>points</span>
+      </div>
+    `;
+    ui.boardList.appendChild(div);
+  });
+}
+
+/* ======================
+   12) Events
+====================== */
+ui.micBtn.addEventListener("click", startSpeech);
+ui.checkBtn.addEventListener("click", ()=> checkAnswer(ui.typeInput.value));
+ui.typeInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(ui.typeInput.value); });
+
+ui.retryBtn.addEventListener("click", ()=>{
+  if(locked) return;
+  ui.status.className = "status";
+  ui.status.textContent = "Retry. Tap the mic and read one option.";
+  ui.typeInput.value = "";
+  ui.transcript.textContent = "Waiting…";
+  ui.confTxt.textContent = "conf: -";
+});
+
+ui.nextBtn.addEventListener("click", next);
 
 ui.startBtn.addEventListener("click", ()=> setPlayer(ui.nameInput.value));
 ui.nameInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") setPlayer(ui.nameInput.value); });
@@ -1544,45 +1985,41 @@ ui.clearAllBtn.addEventListener("click", ()=>{
   localStorage.removeItem(STORE_KEY);
   store = { players:{}, lastPlayer:"" };
   player = "";
-  updatePlayerUI();
-  renderLeaderboard();
+  updatePlayerUI_Local();
+  renderLeaderboard_Local();
   closeNameModal();
 });
 
 ui.changePlayerBtn.addEventListener("click", ()=> openNameModal(true));
 
 ui.resetBoardBtn.addEventListener("click", ()=>{
-  // Keep current player, clear others or clear all? Here clear all.
   localStorage.removeItem(STORE_KEY);
   store = { players:{}, lastPlayer: player || "" };
   if(player){
-    ensurePlayer(player);
+    ensurePlayerLocal(player);
   }
   saveStore(store);
-  updatePlayerUI();
-  renderLeaderboard();
+  updatePlayerUI_Local();
+  renderLeaderboard_Local();
+});
+
+ui.submitFeedbackBtn.addEventListener("click", ()=>{
+  submitFeedback().catch((e)=>{
+    ui.formStatus.classList.remove("hidden");
+    ui.formStatus.className = "status bad";
+    ui.formStatus.textContent = "Submit error. Try again.";
+  });
+});
+
+ui.playAgainBtn.addEventListener("click", ()=>{
+  ui.endScreen.classList.add("hidden");
+  ui.gameScreen.classList.remove("hidden");
+  current = 0;
+  renderLevel();
 });
 
 /* ======================
-   10) Game buttons
-====================== */
-ui.micBtn.addEventListener("click", startSpeech);
-ui.checkBtn.addEventListener("click", ()=> checkAnswer(ui.typeInput.value, null));
-ui.typeInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(ui.typeInput.value, null); });
-
-ui.retryBtn.addEventListener("click", ()=>{
-  if(locked) return;
-  ui.status.className = "status";
-  ui.status.textContent = "Retry. Tap the mic and read one option.";
-  ui.typeInput.value = "";
-  ui.transcript.textContent = "Waiting…";
-  ui.confTxt.textContent = "conf: -";
-});
-
-ui.nextBtn.addEventListener("click", next);
-
-/* ======================
-   11) Init
+   13) Init
 ====================== */
 if(!speechSupported()){
   setTechPill("🎙️ Speech: not supported", false);
@@ -1590,9 +2027,14 @@ if(!speechSupported()){
   setTechPill("🎙️ Speech: ready", true);
 }
 
-updatePlayerUI();
-renderLeaderboard();
+updatePlayerUI_Local();
+renderLeaderboard_Local();
 renderLevel();
+
+initFirebaseIfNeeded().catch(()=>{
+  ui.syncPill.textContent = "🔄 Leaderboard: local (init failed)";
+  ui.syncPill.style.borderColor = "rgba(255,93,108,.35)";
+});
 
 if(!player){
   openNameModal(true);
